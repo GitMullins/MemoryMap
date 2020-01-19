@@ -12,14 +12,14 @@ namespace MemoryMap.api.Repositories
     public class UserRepository : IUserRepository
     {
         string _connectionString = "Server=localhost;Database=MemoryMap;Trusted_Connection=True;";
-        public bool UserNameCheck(string newUserEmailAddressCheck)
+        public bool UserEmailCheck(string newUserEmailCheck)
         {
             using (var db = new SqlConnection(_connectionString))
             {
                 var sql = @"SELECT *
                             FROM [User]
-                            WHERE [EmailAddress] = @newUserEmailAddressCheck";
-                var parameters = new { newUserEmailAddressCheck };
+                            WHERE [Email] = @newUserEmailCheck";
+                var parameters = new { newUserEmailCheck };
                 var emailAddressComesBack = db.Query<User>(sql, parameters);
                 if (emailAddressComesBack.Count() != 0)
                 {
@@ -36,18 +36,18 @@ namespace MemoryMap.api.Repositories
         {
             using (var db = new SqlConnection(_connectionString))
             {
-                var emailAddressExists = UserNameCheck(newUser.EmailAddress);
+                var emailAddressExists = UserEmailCheck(newUser.Email);
                 if (emailAddressExists)
                 {
                     return false;
                 }
                 var sql = @"
                             INSERT INTO [User]
-                                ([EmailAddress],
-                                 [FirebaseUid],
+                                (Email,
+                                 FirebaseUid)
                             OUTPUT INSERTED.Id
                             VALUES
-                                (@emailAddress,
+                                (@email,
                                  @firebaseUid)";
                 var userId = db.QueryFirst<Guid>(sql, newUser);
                 if (userId != null) return true;

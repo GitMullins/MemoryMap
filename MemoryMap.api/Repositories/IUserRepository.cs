@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MemoryMap.api.Repositories
 {
-    interface IUserRepository
+    public interface IUserRepository
     {
         bool AddNewUser(AddNewUserDto newUser);
-        bool UserNameCheck(string newUserNameCheck);
+        bool UserEmailCheck(string newUserEmailCheck);
     }
 }
