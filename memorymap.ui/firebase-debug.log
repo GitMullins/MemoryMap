@@ -1,0 +1,21 @@
+[debug] [2020-01-18T17:19:42.073Z] ----------------------------------------------------------------------
+[debug] [2020-01-18T17:19:42.078Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\test\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2020-01-18T17:19:42.079Z] CLI Version:   7.0.1
+[debug] [2020-01-18T17:19:42.079Z] Platform:      win32
+[debug] [2020-01-18T17:19:42.079Z] Node Version:  v12.13.0
+[debug] [2020-01-18T17:19:42.081Z] Time:          Sat Jan 18 2020 11:19:42 GMT-0600 (Central Standard Time)
+[debug] [2020-01-18T17:19:42.081Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2020-01-18T17:19:42.111Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-01-18T17:19:42.113Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\test\source\repos\MemoryMap\memorymap.ui
+

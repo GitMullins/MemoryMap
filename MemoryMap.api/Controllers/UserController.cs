@@ -15,8 +15,14 @@ namespace MemoryMap.api.Controllers
     [ApiController, Authorize]
     public class UserController : FirebaseEnabledController
     {
-        private readonly ILogger<UserController> _logger;
+        //private readonly ILogger<UserController> _logger;
         private readonly IUserRepository _repo;
+
+        public UserController(IUserRepository repo)
+        {
+            _repo = repo;
+        }
+
 
         // GET: api/User
         [HttpGet]
@@ -38,7 +44,7 @@ namespace MemoryMap.api.Controllers
         {
             if (_repo.AddNewUser(newUser))
             {
-                return Created($"user/{newUser.EmailAddress}", newUser);
+                return Created($"user/{newUser.Email}", newUser);
             }
             else
             {

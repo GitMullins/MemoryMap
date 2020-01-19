@@ -7,7 +7,7 @@ namespace MemoryMap.api.Dtos
 {
     public class AddNewUserDto
     {
-        public string EmailAddress { get; set; }
+        public string Email { get; set; }
         public string FirebaseUid { get; set; }
     }
 }
