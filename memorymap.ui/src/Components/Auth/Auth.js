@@ -1,37 +1,64 @@
 import React from 'react';
 import {
-  Form, ModalBody, ModalFooter, Button, FormGroup, Input, Label
-} from 'reactstrap';
+  Button, ButtonToolbar
+} from 'react-bootstrap';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import UserData from '../../Helpers/Data/UserData';
+import CreateAccountModal from '../CreateAccountModal/CreateAccountModal';
+import './Auth.scss';
 
 const defaultUser = {
-  email: 'a14@gmail.com',
-  password: 'abcd12345',
+  email: '',
+  password: '',
+  firebaseUid: ''
 };
 
 class Auth extends React.Component {
   state = {
-    newUserObj: defaultUser,
+    userObj: defaultUser,
     firebaseInfo: defaultUser,
     createAccountModalOpen: false,
   }
 
-  createAccount = () => {
-    const { newUserObj, firebaseInfo } = this.state;
-    UserData.addUser(newUserObj, firebaseInfo);
-  }
+  logIn = () => {
+    UserData.logInUser(firebase.auth().currentUser.uid)
+    .then((loggedInUserObj) => {
+      this.setState({ userObj: loggedInUserObj });
+    }).catch(err => console.error('log in error', err));
+}
 
   render() {
+    let closeCreateAccountModel = () => this.setState({ createAccountModalOpen: false })
 
     return ( 
-      <div>
-        <button onClick={this.createAccount}>
-          Create Account
-        </button>
+      <div className="container">
+        <div className="row">
+          <ButtonToolbar>
+            <Button
+              className="col btn"
+              id="login-button"
+              variant="success"
+              onClick={this.logIn}>
+              Log In
+            </Button>
+            <Button
+              className="col btn"
+              id="create-account-button"
+              variant='primary'
+              onClick={() => this.setState({ createAccountModalOpen: true })}>
+              Create Account
+            </Button>
+
+            <CreateAccountModal
+            show={this.state.createAccountModalOpen}
+            onHide={closeCreateAccountModel}
+            />
+          </ButtonToolbar>
+        </div>
       </div>
     );
   }
 }
+
 export default Auth;
