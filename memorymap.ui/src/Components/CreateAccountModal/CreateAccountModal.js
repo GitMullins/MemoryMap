@@ -19,7 +19,7 @@ class CreateAccountModal extends React.Component {
 
   createAccount = (e) => {
     e.preventDefault();
-    document.getElementById('closeModal').click();
+    document.getElementById('closeModalBtn').click();
     const { newUser, firebaseInfo } = this.state;
     UserData.addUser(newUser, firebaseInfo)
   }
@@ -67,7 +67,7 @@ class CreateAccountModal extends React.Component {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="danger" id="closeModal" onClick={this.props.onHide}>Close</Button>
+        <Button variant="danger" id="closeModalBtn" onClick={this.props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
     );

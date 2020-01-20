@@ -12,14 +12,13 @@ axios.interceptors.request.use(function (request) {
     if (token != null) {
         request.headers.Authorization = `Bearer ${token}`;
     }
-  
     return request;
   }, function (err) {
     return Promise.reject(err);
   });
 
 const logInUser = (firebaseUid) => new Promise((resolve, reject) => {
-  axios.get(`${baseUrl}/uid/${firebaseUid}`)
+  axios.get(`${baseUrl}/firebaseUid/${firebaseUid}`)
       .then((result) => {
           resolve(result.data)})
       .catch(err => reject(err));
