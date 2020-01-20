@@ -5,7 +5,7 @@ import {
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
-
+import UserData from '../../Helpers/Data/UserData';
 import Auth from '../Auth/Auth';
 import Home from '../Home/Home';
 import './App.scss';
@@ -27,6 +27,7 @@ const PrivateRoute = ({ component: Component, authed, ...rest }) => {
 };
 
 const defaultUser = {
+  id: '',
   email: '',
   firebaseUid: ''
 }
@@ -52,6 +53,17 @@ class App extends React.Component {
    });
  };
 
+  logIn = (userObj) => {
+    //signs user into firebase
+    firebase.auth().signInWithEmailAndPassword(userObj.email, userObj.password)
+        .then(cred => cred.user.getIdToken())
+        .then(token => sessionStorage.setItem('token', token))
+    //searches local database for user with matching firebaseUid 
+        .then(() => UserData.logInUser(firebase.auth().currentUser.uid))
+    //sets state for locally stored userId
+        .then((loggedInUserObj) => this.setState({ userObj: loggedInUserObj }))
+        .catch(err => console.error('log in error', { error: err.message}));
+  }
 
   render(){
     const { authed, userObj } = this.state;
@@ -60,7 +72,7 @@ class App extends React.Component {
       <div className="App">
         <Router>
           <Switch>
-            <PublicRoute path='/auth' component={ Auth } authed={authed} userObj={userObj} />
+            <PublicRoute path='/auth' component={ Auth } authed={authed} userObj={userObj} logIn={this.logIn}/>
             <PrivateRoute path='/home' component={ Home } authed={authed} userObj={userObj} />
             <Redirect from='*' to='/auth'/>
           </Switch>

@@ -1,16 +1,15 @@
 import React from 'react';
 import {
-  Button, ButtonToolbar, Form
+  Button, Form
 } from 'react-bootstrap';
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import UserData from '../../Helpers/Data/UserData';
 import CreateAccountModal from '../CreateAccountModal/CreateAccountModal';
 import './Auth.scss';
 
 const defaultUser = {
+  id: '',
   email: '',
   password: '',
+  firebaseUid: ''
 };
 
 class Auth extends React.Component {
@@ -19,15 +18,10 @@ class Auth extends React.Component {
     createAccountModalOpen: false,
   }
 
-  logIn = (e) => {
+  sendLogInInfo = (e) => {
     e.preventDefault();
     const { userObj } = this.state;
-    firebase.auth().signInWithEmailAndPassword(userObj.email, userObj.password)
-        .then(cred => cred.user.getIdToken())
-        .then(token => sessionStorage.setItem('token', token))
-        .then(() => UserData.logInUser(firebase.auth().currentUser.uid))
-        .then((loggedInUserObj) => this.setState({ userObj: loggedInUserObj }))
-        .catch(err => console.error('log in error', { error: err.message}));
+    this.props.logIn(userObj);
   }
 
   formFieldStringState = (e) => {
@@ -42,7 +36,7 @@ class Auth extends React.Component {
     return ( 
       <div className="container">
         <div className="row">
-          <Form onSubmit={this.logIn}>
+          <Form onSubmit={this.sendLogInInfo}>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
