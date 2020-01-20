@@ -18,12 +18,12 @@ axios.interceptors.request.use(function (request) {
     return Promise.reject(err);
   });
 
-// const logInUser = (firebaseUid) => new Promise((resolve, reject) => {
-//   axios.get(`${baseUrl}/uid/${firebaseUid}`)
-//       .then((result) => {
-//           resolve(result.data)})
-//       .catch(err => reject(err));
-// });
+const logInUser = (firebaseUid) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/uid/${firebaseUid}`)
+      .then((result) => {
+          resolve(result.data)})
+      .catch(err => reject(err));
+});
 
 // const getUserById = uid => new Promise((resolve, reject) => {
 //     axios.get(`${baseUrl}/${uid}`)
@@ -42,6 +42,6 @@ const addUser = (newUserObj, firebaseInfo) => new Promise((resolve, reject) => {
 
 export default {
     addUser,
-    // logInUser,
+    logInUser,
     // getUserById,
 };

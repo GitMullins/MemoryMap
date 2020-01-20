@@ -1,8 +1,7 @@
 import React from 'react';
 import {
-  Modal, Button, Row, Col, Form
+  Modal, Button, Form
 } from 'react-bootstrap';
-import firebase from 'firebase/app';
 import 'firebase/auth';
 import UserData from '../../Helpers/Data/UserData';
 
@@ -20,9 +19,9 @@ class CreateAccountModal extends React.Component {
 
   createAccount = (e) => {
     e.preventDefault();
+    document.getElementById('closeModal').click();
     const { newUser, firebaseInfo } = this.state;
     UserData.addUser(newUser, firebaseInfo)
-    .then(() => document.getElementById('closeModal').click())
   }
 
   formFieldStringState = (e) => {
