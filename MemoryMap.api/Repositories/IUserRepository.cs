@@ -1,4 +1,5 @@
-﻿using MemoryMap.api.Dtos;
+﻿using MemoryMap.api.DataModels;
+using MemoryMap.api.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace MemoryMap.api.Repositories
     {
         bool AddNewUser(AddNewUserDto newUser);
         bool UserEmailCheck(string newUserEmailCheck);
+        User GetUserByFirebaseUid(string firebaseUid);
     }
 }

@@ -31,11 +31,18 @@ namespace MemoryMap.api.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET: api/User/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("firebaseUid/{firebaseUid}")]
+        public IActionResult Get(string firebaseUid)
         {
-            return "value";
+            var user = _repo.GetUserByFirebaseUid(firebaseUid);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(user);
+            }
         }
 
         // POST: api/User
