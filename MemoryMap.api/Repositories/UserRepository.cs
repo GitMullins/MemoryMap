@@ -54,5 +54,18 @@ namespace MemoryMap.api.Repositories
                 else return false;
             }
         }
+
+        public User GetUserByFirebaseUid(string firebaseUid)
+        {
+            using (var db = new SqlConnection(_connectionString))
+            {
+                var sql = @"SELECT *
+                            FROM [User]
+                            WHERE [FirebaseUid] = @firebaseUid";
+                var parameters = new { firebaseUid };
+                var user = db.QueryFirstOrDefault<User>(sql, parameters);
+                return user;
+            }
+        }
     }
 }

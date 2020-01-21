@@ -38,20 +38,20 @@ class App extends React.Component {
     userObj: defaultUser
   };
 
-  componentDidMount () {
-    const { userObj } = this.state;
-    if (userObj.email === '')
-    {
-      firebase.auth().signOut();
-    }
-   this.removeListener = firebase.auth().onAuthStateChanged((user) => {
-     if (user) {
-       this.setState({ authed: true });
-     } else {
-       this.setState({ authed: false, userObj: defaultUser });
-     }
-   });
- };
+//   componentDidMount () {
+//     const { userObj } = this.state;
+//     if (userObj.email === '')
+//     {
+//       firebase.auth().signOut();
+//     }
+//    this.removeListener = firebase.auth().onAuthStateChanged((user) => {
+//      if (user) {
+//        this.setState({ authed: true });
+//      } else {
+//        this.setState({ authed: false, userObj: defaultUser });
+//      }
+//    });
+//  };
 
   logIn = (userObj) => {
     //signs user into firebase
@@ -70,13 +70,14 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <Router>
+        <Home/>
+        {/* <Router>
           <Switch>
             <PublicRoute path='/auth' component={ Auth } authed={authed} userObj={userObj} logIn={this.logIn}/>
             <PrivateRoute path='/home' component={ Home } authed={authed} userObj={userObj} />
             <Redirect from='*' to='/auth'/>
           </Switch>
-        </Router>
+        </Router> */}
     </div>
     );
   }
