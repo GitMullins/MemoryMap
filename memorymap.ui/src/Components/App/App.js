@@ -38,26 +38,29 @@ class App extends React.Component {
     userObj: defaultUser
   };
 
-//   componentDidMount () {
-//     const { userObj } = this.state;
-//     if (userObj.email === '')
-//     {
-//       firebase.auth().signOut();
-//     }
-//    this.removeListener = firebase.auth().onAuthStateChanged((user) => {
-//      if (user) {
-//        this.setState({ authed: true });
-//      } else {
-//        this.setState({ authed: false, userObj: defaultUser });
-//      }
-//    });
-//  };
+  componentDidMount () {
+    const { userObj } = this.state;
+    if (userObj.email === '')
+    {
+      firebase.auth().signOut();
+    }
+   this.removeListener = firebase.auth().onAuthStateChanged((user) => {
+     if (user) {
+       this.setState({ authed: true });
+     } else {
+       this.setState({ authed: false, userObj: defaultUser });
+     }
+   });
+ };
 
   logIn = (userObj) => {
     //signs user into firebase
     firebase.auth().signInWithEmailAndPassword(userObj.email, userObj.password)
         .then(cred => cred.user.getIdToken())
-        .then(token => sessionStorage.setItem('token', token))
+        .then(token => {
+          console.error(token);
+          sessionStorage.setItem('token', token)
+        })
     //searches local database for user with matching firebaseUid 
         .then(() => UserData.logInUser(firebase.auth().currentUser.uid))
     //sets state for locally stored userId
@@ -70,14 +73,14 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <Home/>
-        {/* <Router>
+        {/* <Home/> */}
+        <Router>
           <Switch>
             <PublicRoute path='/auth' component={ Auth } authed={authed} userObj={userObj} logIn={this.logIn}/>
             <PrivateRoute path='/home' component={ Home } authed={authed} userObj={userObj} />
             <Redirect from='*' to='/auth'/>
           </Switch>
-        </Router> */}
+        </Router>
     </div>
     );
   }
