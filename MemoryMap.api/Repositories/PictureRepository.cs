@@ -25,5 +25,34 @@ namespace MemoryMap.api.Repositories
                 return picture;
             }
         }
+
+        public bool AddNewMarker(AddNewMarkerDto newMarker)
+        {
+            using (var db = new SqlConnection(_connectionString))
+            {
+                var sql = @"INSERT INTO [Picture]
+                                (UserId,
+                                 Country,
+                                 Longitude,
+                                 Latitude)
+                            OUTPUT INSERTED.Id
+                            VALUES
+                                (@userId,
+                                 @country,
+                                 @longitude,
+                                 @latitude)";
+
+                var markerId = db.QueryFirst<Guid>(sql, newMarker);
+                if (markerId != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
     }
 }

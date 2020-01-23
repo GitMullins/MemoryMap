@@ -58,7 +58,6 @@ class App extends React.Component {
     firebase.auth().signInWithEmailAndPassword(userObj.email, userObj.password)
         .then(cred => cred.user.getIdToken())
         .then(token => {
-          console.error(token);
           sessionStorage.setItem('token', token)
         })
     //searches local database for user with matching firebaseUid 
