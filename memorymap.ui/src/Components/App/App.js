@@ -46,7 +46,6 @@ class App extends React.Component {
     }
    this.removeListener = firebase.auth().onAuthStateChanged((user) => {
      if (user) {
-       this.setState({ authed: true });
      } else {
        this.setState({ authed: false, userObj: defaultUser });
      }
@@ -57,13 +56,13 @@ class App extends React.Component {
     //signs user into firebase
     firebase.auth().signInWithEmailAndPassword(userObj.email, userObj.password)
         .then(cred => cred.user.getIdToken())
-        .then(token => {
-          sessionStorage.setItem('token', token)
-        })
+        .then(token => sessionStorage.setItem('token', token))
     //searches local database for user with matching firebaseUid 
         .then(() => UserData.logInUser(firebase.auth().currentUser.uid))
     //sets state for locally stored userId
         .then((loggedInUserObj) => this.setState({ userObj: loggedInUserObj }))
+    //sets state for private route access
+        .then(() => this.setState({ authed: true }))
         .catch(err => console.error('log in error', { error: err.message}));
   }
 

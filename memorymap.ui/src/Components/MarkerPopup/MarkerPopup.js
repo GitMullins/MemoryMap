@@ -11,7 +11,7 @@ class MarkerPopup extends React.Component {
     return (
         <Popup>
             <Button>Upload Picture</Button>
-            <p>lat: {marker[0]} <br/>long: {marker[1]}</p>
+            <p>lat: {marker.latitude} <br/>long: {marker.longitude}</p>
         </Popup>
     );
   }

@@ -10,11 +10,11 @@ const baseUrl = 'https://localhost:44369/api/picture'
 //       .catch(err => reject(err));
 // });
 
-// const getUserById = uid => new Promise((resolve, reject) => {
-//     axios.get(`${baseUrl}/${uid}`)
-//         .then(result => resolve(result.data))
-//         .catch(err => reject(err));
-// });
+const getAllMarkersByUid = uid => new Promise((resolve, reject) => {
+    axios.get(`${baseUrl}/allMarkers/${uid}`)
+        .then(result => resolve(result.data))
+        .catch(err => reject(err));
+});
 
 const addMarker = newMarkerObj => new Promise((resolve, reject) => {
   axios.post(`${baseUrl}/newMarker`, newMarkerObj)
@@ -24,4 +24,5 @@ const addMarker = newMarkerObj => new Promise((resolve, reject) => {
 
 export default {
     addMarker,
+    getAllMarkersByUid,
 };

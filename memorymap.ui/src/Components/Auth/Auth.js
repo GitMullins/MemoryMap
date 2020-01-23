@@ -64,20 +64,6 @@ class Auth extends React.Component {
               Create Account
             </Button>
           </Form>
-              {/* <Button
-              className="col btn"
-              id="login-button"
-              variant="success"
-              onClick={this.logIn}>
-              Log In
-            </Button> */}
-            {/* <Button
-              className="col btn"
-              id="create-account-button"
-              variant='primary'
-              onClick={() => this.setState({ createAccountModalOpen: true })}>
-              Create Account
-            </Button> */}
             <CreateAccountModal
             show={this.state.createAccountModalOpen}
             onHide={closeCreateAccountModel}

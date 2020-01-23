@@ -11,5 +11,6 @@ namespace MemoryMap.api.Repositories
     {
         Picture GetPictureById(string picture);
         bool AddNewMarker(AddNewMarkerDto newMarker);
+        IEnumerable<Picture> GetAllPicturesByUid(Guid userId);
     }
 }

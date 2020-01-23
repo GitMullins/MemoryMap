@@ -54,5 +54,19 @@ namespace MemoryMap.api.Repositories
             }
         }
 
+        public IEnumerable<Picture> GetAllPicturesByUid(Guid userId)
+        {
+            using (var db = new SqlConnection(_connectionString))
+            {
+                var sql = @"SELECT *
+                            FROM [Picture]
+                            WHERE [UserId] = @userId";
+
+                var parameters = new { userId };
+                var markers = db.Query<Picture>(sql, parameters);
+                return markers;
+            }
+        }
+
     }
 }

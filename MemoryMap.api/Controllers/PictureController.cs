@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MemoryMap.api.DataModels;
 using MemoryMap.api.Dtos;
 using MemoryMap.api.Repositories;
 using Microsoft.AspNetCore.Http;
@@ -34,6 +35,13 @@ namespace MemoryMap.api.Controllers
             {
                 return Ok(picture);
             }
+        }
+
+        // GET: api/Picture
+        [HttpGet("allMarkers/{userId}")]
+        public IEnumerable<Picture> GetAllPicturesByUid(Guid userId)
+        {
+            return _repo.GetAllPicturesByUid(userId);
         }
 
         // POST: api/Picture

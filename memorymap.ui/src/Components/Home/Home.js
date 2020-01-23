@@ -18,7 +18,7 @@ const defaultMarker = {
   userId: '',
   image: '',
   country: null,
-  date: '',
+  date: null,
   description: '',
   longitude: '',
   latitude: ''
@@ -28,23 +28,30 @@ class Home extends React.Component {
   state = {
     zoom: 3,
     addMarker: false,
-    newMarker: defaultMarker
+    newMarker: defaultMarker,
+    allMarkers: []
+  }
+
+  componentDidMount() {
+    this.displayAllMarkers();
+  }
+
+  displayAllMarkers() {
+    const { id } = this.props.userObj;
+    PictureData.getAllMarkersByUid(id)
+    .then((results) => this.setState({ allMarkers: results }))
+    .catch((err) => console.error('did not get all markers', err));
   }
 
   addMarkerOnMap = (e)=> {
-    // const {markers} = this.state;
-    // if(this.state.addMarker === true) {
-    //   markers.push(e.latlng);
-    //   this.setState({markers});
-    //   this.setState({addMarker: false});
-    //   console.error(markers);
-    const {newMarker} = this.state;
     if(this.state.addMarker === true) {
       const tempMarker = { ...this.state.newMarker };
       tempMarker.latitude = e.latlng.lat;
       tempMarker.longitude = e.latlng.lng;
       tempMarker.userId = this.props.userObj.id;
-      PictureData.addMarker(tempMarker);
+      this.setState({addMarker: false});
+      PictureData.addMarker(tempMarker)
+      .then(() => this.displayAllMarkers())
     }
   }
 
@@ -53,20 +60,20 @@ class Home extends React.Component {
   }
 
   render() {
-    const { markers } = this.state;
+    const { allMarkers } = this.state;
 
-    // const makeMarkers = this.state.markers.map(marker => (
-    //   <Marker
-    //   icon={myIcon}
-    //   // position={[marker[0], marker[1]]}
-    //   key={marker.id}
-    //   marker={marker}
-    //   >
-    //     <MarkerPopup
-    //     marker={marker}
-    //     />
-    //   </Marker>
-    // ));
+    const makeMarkers = allMarkers.map(marker => (
+      <Marker
+      icon={myIcon}
+      position={[marker.latitude, marker.longitude]}
+      key={marker.id}
+      marker={marker}
+      >
+        <MarkerPopup
+        marker={marker}
+        />
+      </Marker>
+    ));
 
     return (
       <div>>
@@ -79,7 +86,7 @@ class Home extends React.Component {
         attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/copyright&quot;>OpenStreetMap</a> contributors, Tiles style by <a href=&quot;https://www.hotosm.org/&quot; target=&quot;_blank&quot;>Humanitarian OpenStreetMap Team</a> hosted by <a href=&quot;https://openstreetmap.fr/&quot; target=&quot;_blank&quot;>OpenStreetMap France</a>"
         url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
         />
-        {/* { makeMarkers } */}
+        { makeMarkers }
       </Map>
       <button onClick={this.allowMarkerPlacement}>
       Add Marker
