@@ -69,11 +69,17 @@ class Home extends React.Component {
       key={marker.id}
       marker={marker}
       >
-        <MarkerPopup
+        <MarkerPopup className="popup"
         marker={marker}
         />
       </Marker>
     ));
+
+  //   function hexToBase64(str) {
+  //     return btoa(String.fromCharCode.apply(null, str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" ")));
+  // }
+
+  // const getImage = allMarkers[0].image.src = 'data:image/jpeg;base64,' + hexToBase64(binaryData);
 
     return (
       <div>>
@@ -91,6 +97,7 @@ class Home extends React.Component {
       <button onClick={this.allowMarkerPlacement}>
       Add Marker
       </button>
+      {/* {getImage} */}
       </div>
     );
   }
