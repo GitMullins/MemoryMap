@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using MemoryMap.api.DataModels;
@@ -59,10 +60,23 @@ namespace MemoryMap.api.Controllers
         }
 
 
-        // PUT: api/Picture/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // PUT: api/
+        [HttpPut("putPicture/{markerId}")]
+        public IActionResult PutPictureByMarkerId(Guid markerId, [FromForm]IFormFile file)
         {
+            byte[] fileBytes;
+            using (var stream = new MemoryStream())
+            {
+                file.CopyTo(stream);
+                fileBytes = stream.ToArray();
+            }
+
+            _repo.PutPictureByMarkerId(markerId, fileBytes);
+
+            return Ok();
+
+            //save a reference to the file to your database
+            //_repo.addImage(fileName, filePath, contentType)
         }
 
         // DELETE: api/ApiWithActions/5

@@ -37,8 +37,7 @@ class Home extends React.Component {
   }
 
   displayAllMarkers() {
-    const { id } = this.props.userObj;
-    PictureData.getAllMarkersByUid(id)
+    PictureData.getAllMarkersByUid(this.props.userObj.id)
     .then((results) => this.setState({ allMarkers: results }))
     .catch((err) => console.error('did not get all markers', err));
   }
@@ -69,35 +68,33 @@ class Home extends React.Component {
       key={marker.id}
       marker={marker}
       >
-        <MarkerPopup className="popup"
+        <MarkerPopup
+        putPicture={this.putPicture}
+        displayAllMarkers={this.displayAllMarkers}
+        userObj={this.props.userObj}
+        className="popup"
         marker={marker}
         />
       </Marker>
     ));
 
-  //   function hexToBase64(str) {
-  //     return btoa(String.fromCharCode.apply(null, str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" ")));
-  // }
-
-  // const getImage = allMarkers[0].image.src = 'data:image/jpeg;base64,' + hexToBase64(binaryData);
-
     return (
       <div>>
-      <Map className="map"
-      center={[47.5162, 14.5501]}
-      zoom={this.state.zoom}
-      onClick={this.addMarkerOnMap}
-      >
-        <TileLayer 
-        attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/copyright&quot;>OpenStreetMap</a> contributors, Tiles style by <a href=&quot;https://www.hotosm.org/&quot; target=&quot;_blank&quot;>Humanitarian OpenStreetMap Team</a> hosted by <a href=&quot;https://openstreetmap.fr/&quot; target=&quot;_blank&quot;>OpenStreetMap France</a>"
-        url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
-        />
-        { makeMarkers }
-      </Map>
-      <button onClick={this.allowMarkerPlacement}>
-      Add Marker
-      </button>
-      {/* {getImage} */}
+        <Map
+        className="map"
+        center={[47.5162, 14.5501]}
+        zoom={this.state.zoom}
+        onClick={this.addMarkerOnMap}
+        >
+          <TileLayer 
+          attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/copyright&quot;>OpenStreetMap</a> contributors, Tiles style by <a href=&quot;https://www.hotosm.org/&quot; target=&quot;_blank&quot;>Humanitarian OpenStreetMap Team</a> hosted by <a href=&quot;https://openstreetmap.fr/&quot; target=&quot;_blank&quot;>OpenStreetMap France</a>"
+          url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
+          />
+          { makeMarkers }
+        </Map>
+        <button onClick={this.allowMarkerPlacement}>
+        Add Marker
+        </button>
       </div>
     );
   }

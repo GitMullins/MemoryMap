@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text;
 
 namespace MemoryMap.api.Repositories
 {
@@ -65,6 +66,18 @@ namespace MemoryMap.api.Repositories
                 var parameters = new { userId };
                 var markers = db.Query<Picture>(sql, parameters);
                 return markers;
+            }
+        }
+
+        public bool PutPictureByMarkerId(Guid editedMarkerId, byte[]  file)
+        {
+            using (var db = new SqlConnection(_connectionString))
+            {
+                var sql = @"UPDATE [Picture]
+                            SET [Image] = @file
+                            WHERE [Id] = @editedMarkerId";
+                var pic = new { editedMarkerId, file };
+                return db.Execute(sql, pic) == 1;
             }
         }
 
