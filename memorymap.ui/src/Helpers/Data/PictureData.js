@@ -3,12 +3,18 @@ import axios from 'axios';
 const baseUrl = 'https://localhost:44369/api/picture'
 
 
-// const getPicture = (firebaseUid) => new Promise((resolve, reject) => {
-//   axios.get(`${baseUrl}/firebaseUid/${firebaseUid}`)
-//       .then((result) => {
-//           resolve(result.data)})
-//       .catch(err => reject(err));
-// });
+const putPicture = (markerId, form) => new Promise((resolve, reject) => {
+  const config = {
+    headers: {
+      'content-type': 'multipart/form-data',
+    },
+  };
+  
+  axios.put(`${baseUrl}/putPicture/${markerId}`, form, config)
+      .then((result) => {
+          resolve(result.data)})
+      .catch(err => reject(err));
+});
 
 const getAllMarkersByUid = uid => new Promise((resolve, reject) => {
     axios.get(`${baseUrl}/allMarkers/${uid}`)
@@ -25,4 +31,5 @@ const addMarker = newMarkerObj => new Promise((resolve, reject) => {
 export default {
     addMarker,
     getAllMarkersByUid,
+    putPicture
 };
