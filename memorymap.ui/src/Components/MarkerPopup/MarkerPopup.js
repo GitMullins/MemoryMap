@@ -9,33 +9,33 @@ import './MarkerPopup.scss';
 
 class MarkerPopup extends React.Component {
   state = {
-    refresh: false
+    editedMarker: {
+      image: null,
+      country: null,
+      date: null,
+      description: null
+    }
   }
-//  fileUploadHandler = (e) => {
-//     const { marker } = this.props;
-//     const pictureUrl = e.target.files[0].name;
-//     this.setState({
-//       fileSelected: pictureUrl
-//     })
-//       // PictureData.putPicture(marker.id, picture.stringOfBase64);
-//       // console.error(pictureUrl);
-//     // }))
-//     // .then(() => this.props.displayAllMarkers())
-//     // .catch((err) => console.error('could not upload picture', err));
-//   }
 
   fileUploadHandler = (e) => {
     const formData = new FormData();
+    const tempMarker = { ...this.state.editedMarker };
+//sends selected image as a 'form' to asp.net
     formData.append('file', e.target.files[0]);
     PictureData.putPicture(this.props.marker.id, formData)
-    .then(() => this.setState({ refresh: true }))
-    .then(() => this.setState({ refresh: false }))
+    .then(() => PictureData.getMarkerByMarkerId(this.props.marker.id))
+
+    .then((marker) => { tempMarker.image = marker.image })
+    .then(() => this.setState({ editedMarker: tempMarker }));
   };
 
   returnImageOrButton = () => {
     const { marker } = this.props;
+    const { editedMarker } = this.state;
     if(marker.image) {
       return <img className="marker-picture" alt="in country pic" src={`data:image/jpg;base64,${marker.image}`}/>
+    } else if(editedMarker.image) {
+      return <img className="marker-picture" alt="in country pic" src={`data:image/jpg;base64,${editedMarker.image}`}/>
     } else {
       return  <InputGroup>
                 <FormControl
@@ -47,10 +47,10 @@ class MarkerPopup extends React.Component {
 
   render() {
     const { marker } = this.props;
-    const { refresh } = this.state;
+    const { editedMarker } = this.props;
 
     return (
-        <Popup className="popup-sub" refresh={refresh}>
+        <Popup className="popup-sub" editedMarker={editedMarker}>
           { this.returnImageOrButton() }
           <h5>{marker.description}</h5>
           <p>lat: {marker.latitude} <br/>long: {marker.longitude}</p>

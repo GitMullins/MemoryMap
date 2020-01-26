@@ -25,11 +25,18 @@ const getAllMarkersByUid = uid => new Promise((resolve, reject) => {
 const addMarker = newMarkerObj => new Promise((resolve, reject) => {
   axios.post(`${baseUrl}/newMarker`, newMarkerObj)
       .then(result => resolve(result.data))
-      .catch(err => reject(err))
+      .catch(err => reject(err));
 });
+
+const getMarkerByMarkerId = markerId => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/${markerId}`)
+  .then(result => resolve(result.data))
+  .catch(err => reject(err));
+})
 
 export default {
     addMarker,
     getAllMarkersByUid,
-    putPicture
+    putPicture,
+    getMarkerByMarkerId
 };
