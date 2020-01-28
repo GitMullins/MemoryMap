@@ -36,7 +36,8 @@ class Home extends React.Component {
     this.displayAllMarkers();
   }
 
-  displayAllMarkers() {
+  displayAllMarkers = () => {
+    // console.error('displayAllMarkers, home', userId)
     PictureData.getAllMarkersByUid(this.props.userObj.id)
     .then((results) => this.setState({ allMarkers: results }))
     .catch((err) => console.error('did not get all markers', err));
@@ -50,7 +51,7 @@ class Home extends React.Component {
       tempMarker.userId = this.props.userObj.id;
       this.setState({addMarker: false});
       PictureData.addMarker(tempMarker)
-      .then(() => this.displayAllMarkers())
+      .then(() => this.displayAllMarkers(this.props.userObj.id))
     }
   }
 

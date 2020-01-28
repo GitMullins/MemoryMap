@@ -1,6 +1,6 @@
 import React from 'react';
 import  { Popup } from 'react-leaflet';
-import { FormControl, InputGroup } from 'react-bootstrap';
+import { Button, FormControl, InputGroup } from 'react-bootstrap';
 import PictureData from '../../Helpers/Data/PictureData';
 
 import './MarkerPopup.scss';
@@ -15,6 +15,12 @@ class MarkerPopup extends React.Component {
       date: null,
       description: null
     }
+  }
+
+  deleteMarker = () => {
+    PictureData.deleteMarkerByMarkerId(this.props.marker.id)
+    .then(() => this.props.displayAllMarkers())
+    .catch((err)=> console.error('could not delete marker', err));
   }
 
   fileUploadHandler = (e) => {
@@ -50,10 +56,13 @@ class MarkerPopup extends React.Component {
     const { editedMarker } = this.props;
 
     return (
-        <Popup className="popup-sub" editedMarker={editedMarker}>
+        <Popup
+        className="popup-sub"
+        editedMarker={editedMarker}>
           { this.returnImageOrButton() }
           <h5>{marker.description}</h5>
           <p>lat: {marker.latitude} <br/>long: {marker.longitude}</p>
+          <Button onClick={this.deleteMarker} className="btn-danger">Delete Marker</Button>
         </Popup>
     );
   }
