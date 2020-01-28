@@ -81,5 +81,16 @@ namespace MemoryMap.api.Repositories
             }
         }
 
+        public bool DeleteMarkerByMarkerId(Guid markerId)
+        {
+            using (var db = new SqlConnection(_connectionString))
+            {
+                var sql = @"DELETE FROM [Picture]
+                            WHERE [Id] = @markerId";
+                var marker = new { markerId };
+                return db.Execute(sql, marker) == 1;
+            }
+        }
+
     }
 }

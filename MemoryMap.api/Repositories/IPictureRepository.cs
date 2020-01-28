@@ -13,5 +13,6 @@ namespace MemoryMap.api.Repositories
         bool AddNewMarker(AddNewMarkerDto newMarker);
         IEnumerable<Picture> GetAllPicturesByUid(Guid userId);
         bool PutPictureByMarkerId(Guid markerId, byte[] file);
+        bool DeleteMarkerByMarkerId(Guid markerId);
     }
 }

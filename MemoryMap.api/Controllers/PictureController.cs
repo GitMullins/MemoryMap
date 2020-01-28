@@ -80,9 +80,17 @@ namespace MemoryMap.api.Controllers
         }
 
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("marker/{markerId}")]
+        public IActionResult DeleteMarkerByMarkerId(Guid markerId)
         {
+            if (_repo.DeleteMarkerByMarkerId(markerId))
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }

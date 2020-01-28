@@ -34,9 +34,16 @@ const getMarkerByMarkerId = markerId => new Promise((resolve, reject) => {
   .catch(err => reject(err));
 })
 
+const deleteMarkerByMarkerId = markerId => new Promise((resolve, reject) => {
+  axios.delete(`${baseUrl}/marker/${markerId}`)
+  .then(result => resolve(result.data))
+  .catch(err => reject(err));
+})
+
 export default {
     addMarker,
     getAllMarkersByUid,
     putPicture,
-    getMarkerByMarkerId
+    getMarkerByMarkerId,
+    deleteMarkerByMarkerId
 };
