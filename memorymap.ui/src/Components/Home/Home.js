@@ -68,12 +68,15 @@ class Home extends React.Component {
       position={[marker.latitude, marker.longitude]}
       key={marker.id}
       marker={marker}
+      putPicture={this.putPicture}
+      displayAllMarkers={this.displayAllMarkers}
+      userObj={this.props.userObj}
       >
         <MarkerPopup
         putPicture={this.putPicture}
         displayAllMarkers={this.displayAllMarkers}
         userObj={this.props.userObj}
-        className="popup"
+        className="marker-popup"
         marker={marker}
         />
       </Marker>
