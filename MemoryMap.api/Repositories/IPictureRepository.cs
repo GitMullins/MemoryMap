@@ -14,5 +14,7 @@ namespace MemoryMap.api.Repositories
         IEnumerable<Picture> GetAllPicturesByUid(Guid userId);
         bool PutPictureByMarkerId(Guid markerId, byte[] file);
         bool DeleteMarkerByMarkerId(Guid markerId);
+        bool EditDescriptionByMarkerId(Guid markerId, string marker);
+
     }
 }

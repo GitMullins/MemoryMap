@@ -40,10 +40,23 @@ const deleteMarkerByMarkerId = markerId => new Promise((resolve, reject) => {
   .catch(err => reject(err));
 })
 
+const editMarkerDescription = (markerId, marker) => new Promise((resolve, reject) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  axios.put(`${baseUrl}/editDescription/${markerId}`, marker, config)
+      .then((result) => resolve(result.data))
+      .catch(err => reject(err));
+});
+
+
 export default {
     addMarker,
     getAllMarkersByUid,
     putPicture,
     getMarkerByMarkerId,
-    deleteMarkerByMarkerId
+    deleteMarkerByMarkerId,
+    editMarkerDescription
 };
