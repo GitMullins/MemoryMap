@@ -74,9 +74,20 @@ namespace MemoryMap.api.Controllers
             _repo.PutPictureByMarkerId(markerId, fileBytes);
 
             return Ok();
+        }
 
-            //save a reference to the file to your database
-            //_repo.addImage(fileName, filePath, contentType)
+        // PUT: api/
+        [HttpPut("editDescription/{markerId}")]
+        public IActionResult EditDescription(Guid markerId, [FromBody] string markerDescription)
+        {
+            if (_repo.EditDescriptionByMarkerId(markerId, markerDescription))
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         // DELETE: api/ApiWithActions/5

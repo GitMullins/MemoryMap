@@ -69,7 +69,7 @@ namespace MemoryMap.api.Repositories
             }
         }
 
-        public bool PutPictureByMarkerId(Guid editedMarkerId, byte[]  file)
+        public bool PutPictureByMarkerId(Guid editedMarkerId, byte[] file)
         {
             using (var db = new SqlConnection(_connectionString))
             {
@@ -77,6 +77,18 @@ namespace MemoryMap.api.Repositories
                             SET [Image] = @file
                             WHERE [Id] = @editedMarkerId";
                 var pic = new { editedMarkerId, file };
+                return db.Execute(sql, pic) == 1;
+            }
+        }
+
+        public bool EditDescriptionByMarkerId(Guid editedMarkerId, string markerDescription)
+        {
+            using (var db = new SqlConnection(_connectionString))
+            {
+                var sql = @"UPDATE [Picture]
+                            SET [Description] = @markerDescription
+                            WHERE [Id] = @editedMarkerId";
+                var pic = new { editedMarkerId, markerDescription };
                 return db.Execute(sql, pic) == 1;
             }
         }
