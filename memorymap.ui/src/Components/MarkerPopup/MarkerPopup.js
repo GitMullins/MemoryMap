@@ -94,6 +94,7 @@ class MarkerPopup extends React.Component {
                       onChange={this.descriptionHandler}
                       />
                     </Form>
+    else if(show!==true) return <h5>{marker.description}</h5>
   }
 
   render() {
@@ -105,7 +106,6 @@ class MarkerPopup extends React.Component {
           { this.returnChooseFileBtn() }
           { this.returnImage() }
           { this.returnDescription() }
-          <h5>{marker.description}</h5>
           <p>lat: {marker.latitude} <br/>long: {marker.longitude}</p>
           <Button onClick={this.deleteMarker} className="btn-danger">Delete Marker</Button>
           <Button onClick={this.editMarkerBtn} className="btn-primary">Edit Marker</Button>

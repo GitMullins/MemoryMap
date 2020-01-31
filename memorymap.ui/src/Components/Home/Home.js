@@ -3,6 +3,7 @@ import L from 'leaflet';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import MarkerPopup from '../MarkerPopup/MarkerPopup';
 import PictureData from '../../Helpers/Data/PictureData';
+import MyNavbar from '../MyNavbar/MyNavbar';
 
 import './Home.scss';
 
@@ -56,11 +57,13 @@ class Home extends React.Component {
   }
 
   allowMarkerPlacement = () => {
-    this.setState({ addMarker: true });
+    this.setState({ addMarker: !this.state.addMarker });
   }
 
   render() {
+    const { userObj } = this.props;
     const { allMarkers } = this.state;
+    const { addMarker } =this.state;
 
     const makeMarkers = allMarkers.map(marker => (
       <Marker
@@ -70,12 +73,12 @@ class Home extends React.Component {
       marker={marker}
       putPicture={this.putPicture}
       displayAllMarkers={this.displayAllMarkers}
-      userObj={this.props.userObj}
+      userObj={userObj}
       >
         <MarkerPopup
         putPicture={this.putPicture}
         displayAllMarkers={this.displayAllMarkers}
-        userObj={this.props.userObj}
+        userObj={userObj}
         className="marker-popup"
         marker={marker}
         />
@@ -83,7 +86,7 @@ class Home extends React.Component {
     ));
 
     return (
-      <div>>
+      <div className="map-navbar-container">
         <Map
         className="map"
         center={[47.5162, 14.5501]}
@@ -96,9 +99,11 @@ class Home extends React.Component {
           />
           { makeMarkers }
         </Map>
-        <button onClick={this.allowMarkerPlacement}>
-        Add Marker
-        </button>
+        <MyNavbar
+        userObj={ userObj }
+        allowMarkerPlacement={this.allowMarkerPlacement}
+        addMarker={addMarker}
+        />
       </div>
     );
   }
