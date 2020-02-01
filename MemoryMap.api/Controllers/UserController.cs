@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MemoryMap.api.DataModels;
 using MemoryMap.api.Dtos;
 using MemoryMap.api.Repositories;
 using Microsoft.AspNetCore.Authorization;
@@ -59,10 +60,18 @@ namespace MemoryMap.api.Controllers
             }
         }
 
-        // PUT: api/User/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // PUT: api/User/
+        [HttpPut("{userId}")]
+        public IActionResult EditUser(User editedUser)
         {
+            if (_repo.EditUser(editedUser))
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         // DELETE: api/ApiWithActions/5

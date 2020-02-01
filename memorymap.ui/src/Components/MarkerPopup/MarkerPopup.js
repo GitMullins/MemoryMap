@@ -33,6 +33,7 @@ class MarkerPopup extends React.Component {
   editMarkerDescription = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    this.setState({show: !this.state.show});
     const markerId = this.props.marker.id;
     const { editedMarker } = this.state;
     PictureData.editMarkerDescription(markerId, JSON.stringify(editedMarker.description))
@@ -90,7 +91,7 @@ class MarkerPopup extends React.Component {
                       <FormControl
                       type="text"
                       placeholder="Description"
-                      value={marker.description?marker.description:editedMarker.description}
+                      value={editedMarker.description?editedMarker.description:marker.description}
                       onChange={this.descriptionHandler}
                       />
                     </Form>

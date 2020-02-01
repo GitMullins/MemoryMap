@@ -12,5 +12,6 @@ namespace MemoryMap.api.Repositories
         bool AddNewUser(AddNewUserDto newUser);
         bool UserEmailCheck(string newUserEmailCheck);
         User GetUserByFirebaseUid(string firebaseUid);
+        bool EditUser(User editedUser);
     }
 }

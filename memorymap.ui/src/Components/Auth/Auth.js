@@ -31,7 +31,7 @@ class Auth extends React.Component {
   }
 
   render() {
-    let closeCreateAccountModel = () => this.setState({ createAccountModalOpen: false })
+    let closeCreateAccountModel = () => this.setState({ createAccountModalOpen: false });
 
     return ( 
       <div className="container">
