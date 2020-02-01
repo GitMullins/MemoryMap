@@ -12,6 +12,7 @@ const defaultUser = {
   id: '',
   email: '',
   password: '',
+  newPassword: '',
   firebaseUid: ''
 };
 
@@ -30,15 +31,8 @@ class EditAccountModal extends React.Component {
 
   formFieldStringState = (e) => {
     const tempUser = { ...this.state.editedUser };
-    tempUser[e.target.type] = e.target.value;
+    tempUser[e.target.name] = e.target.value;
     this.setState({ editedUser: tempUser });
-  }
-
-  returnEmailValue = () => {
-    const { editedUser } = this.state;
-    if(editedUser.email === '') {
-      return firebase.auth().currentUser.email
-    } else return editedUser.email;
   }
 
   render() {
@@ -48,7 +42,7 @@ class EditAccountModal extends React.Component {
 
       <Modal
       {...rest}
-      size="lg"
+      size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
       >
@@ -60,23 +54,35 @@ class EditAccountModal extends React.Component {
         <Modal.Body>
           <Form onSubmit={this.editAccount}>
             <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label>Current Email: {firebase.auth().currentUser.email}</Form.Label>
               <Form.Control
+              name="email"
               type="email"
-              placeholder="Enter email"
+              placeholder="Enter new email"
               onChange={this.formFieldStringState}
-              value={this.returnEmailValue()}
               />
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>Current Password</Form.Label>
               <Form.Control
+              name="password"
               type="password"
-              placeholder="Password"
+              placeholder="Current Password"
               onChange={this.formFieldStringState}
               />
             </Form.Group>
+
+            <Form.Group controlId="newPassword">
+              <Form.Label>New Password</Form.Label>
+              <Form.Control
+              name="newPassword"
+              type="password"
+              placeholder="New Password"
+              onChange={this.formFieldStringState}
+              />
+            </Form.Group>
+
             <Button variant="primary" type="submit">
               Submit
             </Button>

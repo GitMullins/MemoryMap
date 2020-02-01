@@ -33,27 +33,23 @@ const addUser = (newUserObj, firebaseInfo) => new Promise((resolve, reject) => {
     .catch(err => reject(err));
 });
 
-const editUser = (editedUserObj) => new Promise((resolve, reject) => {
-  const firebaseEmail = new Promise (resolve => {
-    if(editedUserObj.email) {
-      var user = firebase.auth().currentUser;
-      var cred = firebase.auth.EmailAuthProvider.credential(user.email, editedUserObj.password);
-      user.reauthenticateWithCredential(cred)
-      .then(() => resolve(firebase.auth().currentUser.updateEmail(editedUserObj.email)));
-    } else reject(console.error('email update error'));
-  })
-  // const firebasePassword = () => new Promise(resolve => {
-  //   if(editedUserObj.password) {
-  //   resolve(firebase.auth().currentUser.updatePassword(editedUserObj.password));
-  //   } else resolve(null);
-  // })
+const editUser = (editedUserObj) => new Promise((resolve) => {
+  var user = firebase.auth().currentUser;
+  var cred = firebase.auth.EmailAuthProvider.credential(user.email, editedUserObj.password);
 
-  Promise.all([firebaseEmail])
-  .then(() => {
     if(editedUserObj.email) {
-    resolve(axios.put(`${baseUrl}/${editedUserObj.id}`, editedUserObj))
-    } else resolve(null)})
-  .catch(err => reject(err));
+      axios.put(`${baseUrl}/${editedUserObj.id}`, editedUserObj);
+      user.reauthenticateWithCredential(cred)
+      .then(() => resolve(firebase.auth().currentUser.updateEmail(editedUserObj.email)))
+      .catch((err) => console.error('email update error', err));
+    }
+
+    if(editedUserObj.newPassword) {
+      user.reauthenticateWithCredential(cred)
+      .then(() => resolve(firebase.auth().currentUser.updatePassword(editedUserObj.newPassword)))
+      .catch((err) => console.error('password update error', err));
+    }
+
 });
 
 export default {
