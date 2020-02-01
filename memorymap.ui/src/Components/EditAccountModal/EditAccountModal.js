@@ -6,6 +6,7 @@ import 'firebase/auth';
 import UserData from '../../Helpers/Data/UserData';
 import 'firebase/auth';
 import firebase from 'firebase/app';
+import DeleteAccountModal from '../DeleteAccountModal/DeleteAccountModal';
 
 
 const defaultUser = {
@@ -18,6 +19,7 @@ const defaultUser = {
 
 class EditAccountModal extends React.Component {
   state = {
+    deleteAccountModalOpen: false,
     editedUser: defaultUser,
   }
 
@@ -37,6 +39,7 @@ class EditAccountModal extends React.Component {
 
   render() {
     const { userObj, ...rest } = this.props;
+    let closeDeleteAccountModal = () => this.setState({ deleteAccountModalOpen: false })
   
     return (
 
@@ -89,8 +92,19 @@ class EditAccountModal extends React.Component {
           </Form>
         </Modal.Body>
         <Modal.Footer>
+          <Button
+          variant="danger"
+          id="closeDeleteModalBtn"
+          onClick={() => this.setState({ deleteAccountModalOpen: true })}
+          >DELETE ACCOUNT
+          </Button>
           <Button variant="danger" id="closeModalBtn" onClick={this.props.onHide}>Cancel</Button>
         </Modal.Footer>
+        <DeleteAccountModal
+        show={this.state.deleteAccountModalOpen}
+        onHide={closeDeleteAccountModal}
+        >
+        </DeleteAccountModal>
     </Modal>
     );
   }

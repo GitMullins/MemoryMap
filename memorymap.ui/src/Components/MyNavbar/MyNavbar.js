@@ -37,7 +37,7 @@ class MyNavbar extends React.Component {
   }
 
   render() {
-    let closeEditAccountModel = () => this.setState({ editAccountModalOpen: false })
+    let closeEditAccountModal = () => this.setState({ editAccountModalOpen: false })
 
       return (
       <Navbar fixed="bottom" className="navbar-map">
@@ -54,7 +54,7 @@ class MyNavbar extends React.Component {
         <EditAccountModal
         userObj={ this.props.userObj }
         show={this.state.editAccountModalOpen}
-        onHide={closeEditAccountModel}
+        onHide={closeEditAccountModal}
         />
       </Navbar>
       );
