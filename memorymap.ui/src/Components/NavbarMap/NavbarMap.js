@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import EditAccountModal from '../EditAccountModal/EditAccountModal';
+import 'firebase/auth';
+import firebase from 'firebase/app';
 import {
   // Collapse,
   Navbar,
@@ -16,7 +18,7 @@ import {
   // ModalHeader,
 } from 'reactstrap';
 
-class MyNavbar extends React.Component {
+class NavbarMap extends React.Component {
   state = {
     editAccountModalOpen: false
   }
@@ -33,7 +35,11 @@ class MyNavbar extends React.Component {
     if(addMarker) {
       return 'btn-danger btn'
     } else return 'btn-primary btn'
+  }
 
+  logOut = (e) => {
+    e.preventDefault();
+    firebase.auth().signOut();
   }
 
   render() {
@@ -56,9 +62,10 @@ class MyNavbar extends React.Component {
         show={this.state.editAccountModalOpen}
         onHide={closeEditAccountModal}
         />
+        <Button onClick={this.logOut}>LogOut</Button>
       </Navbar>
       );
   }
 }
 
-export default MyNavbar;
+export default NavbarMap;

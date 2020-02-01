@@ -1,4 +1,5 @@
 import axios from 'axios';
+import apiKeys from '../apiKeys.json';
 
 const baseUrl = 'https://localhost:44369/api/picture'
 
@@ -23,9 +24,16 @@ const getAllMarkersByUid = uid => new Promise((resolve, reject) => {
 });
 
 const addMarker = newMarkerObj => new Promise((resolve, reject) => {
-  axios.post(`${baseUrl}/newMarker`, newMarkerObj)
-      .then(result => resolve(result.data))
-      .catch(err => reject(err));
+  const geocodeApi = apiKeys.googleReverseGeocodeKey.apiKey;
+  const api = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${newMarkerObj.latitude},${newMarkerObj.longitude}&result_type=country&key=${geocodeApi}`
+  fetch(api).then((res) => res.json())
+  .then((jsonObj) => {
+    newMarkerObj.country = jsonObj.results[0].formatted_address;
+  })
+
+  .then(() => axios.post(`${baseUrl}/newMarker`, newMarkerObj))
+  .then(result => resolve(result.data))
+  .catch(err => reject(err));
 });
 
 const getMarkerByMarkerId = markerId => new Promise((resolve, reject) => {

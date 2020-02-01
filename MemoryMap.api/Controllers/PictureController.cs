@@ -40,9 +40,9 @@ namespace MemoryMap.api.Controllers
 
         // GET: api/Picture
         [HttpGet("allMarkers/{userId}")]
-        public IEnumerable<Picture> GetAllPicturesByUid(Guid userId)
+        public IEnumerable<Picture> GetAllMarkersByUid(Guid userId)
         {
-            return _repo.GetAllPicturesByUid(userId);
+            return _repo.GetAllMarkersByUid(userId);
         }
 
         // POST: api/Picture
