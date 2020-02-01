@@ -2,8 +2,8 @@ import React from 'react';
 import L from 'leaflet';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import MarkerPopup from '../MarkerPopup/MarkerPopup';
-import PictureData from '../../Helpers/Data/PictureData';
-import MyNavbar from '../MyNavbar/MyNavbar';
+import MarkerData from '../../Helpers/Data/MarkerData';
+import NavbarMap from '../NavbarMap/NavbarMap';
 
 import './Home.scss';
 
@@ -38,8 +38,7 @@ class Home extends React.Component {
   }
 
   displayAllMarkers = () => {
-    // console.error('displayAllMarkers, home', userId)
-    PictureData.getAllMarkersByUid(this.props.userObj.id)
+    MarkerData.getAllMarkersByUid(this.props.userObj.id)
     .then((results) => this.setState({ allMarkers: results }))
     .catch((err) => console.error('did not get all markers', err));
   }
@@ -51,7 +50,7 @@ class Home extends React.Component {
       tempMarker.longitude = e.latlng.lng;
       tempMarker.userId = this.props.userObj.id;
       this.setState({addMarker: false});
-      PictureData.addMarker(tempMarker)
+      MarkerData.addMarker(tempMarker)
       .then(() => this.displayAllMarkers(this.props.userObj.id))
     }
   }
@@ -99,7 +98,7 @@ class Home extends React.Component {
           />
           { makeMarkers }
         </Map>
-        <MyNavbar
+        <NavbarMap
         userObj={ userObj }
         allowMarkerPlacement={this.allowMarkerPlacement}
         addMarker={addMarker}

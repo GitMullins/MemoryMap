@@ -1,7 +1,7 @@
 import React from 'react';
 import  { Popup } from 'react-leaflet';
 import { Button, Form, FormControl, InputGroup } from 'react-bootstrap';
-import PictureData from '../../Helpers/Data/PictureData';
+import MarkerData from '../../Helpers/Data/MarkerData';
 
 import './MarkerPopup.scss';
 
@@ -25,7 +25,7 @@ class MarkerPopup extends React.Component {
   }
 
   deleteMarker = () => {
-    PictureData.deleteMarkerByMarkerId(this.props.marker.id)
+    MarkerData.deleteMarkerByMarkerId(this.props.marker.id)
     .then(() => this.props.displayAllMarkers())
     .catch((err) => console.error('could not delete marker', err));
   }
@@ -36,7 +36,7 @@ class MarkerPopup extends React.Component {
     this.setState({show: !this.state.show});
     const markerId = this.props.marker.id;
     const { editedMarker } = this.state;
-    PictureData.editMarkerDescription(markerId, JSON.stringify(editedMarker.description))
+    MarkerData.editMarkerDescription(markerId, JSON.stringify(editedMarker.description))
     .then(() => this.props.displayAllMarkers())
     .catch((err) => console.error('could not edit description', err));
   }
@@ -50,8 +50,8 @@ class MarkerPopup extends React.Component {
 
       //sends selected image as a 'form' to asp.net
       formData.append('file', e.target.files[0]);
-      PictureData.putPicture(this.props.marker.id, formData)
-      .then(() => PictureData.getMarkerByMarkerId(this.props.marker.id))
+      MarkerData.putPicture(this.props.marker.id, formData)
+      .then(() => MarkerData.getMarkerByMarkerId(this.props.marker.id))
       .then((marker) => { tempMarker.image = marker.image })
       .then(() => this.props.displayAllMarkers())
       .catch((err) => console.error(err, 'could not update pic'))
@@ -116,6 +116,7 @@ class MarkerPopup extends React.Component {
           { this.returnImage() }
           { this.returnDescription() }
           <p>lat: {marker.latitude} <br/>long: {marker.longitude}</p>
+          <h5>{marker.country}</h5>
           <Button onClick={this.deleteMarker} className="btn-danger">Delete Marker</Button>
           <Button onClick={this.editMarkerBtn} className="btn-primary">Edit Marker</Button>
         </Popup>
