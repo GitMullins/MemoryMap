@@ -82,16 +82,24 @@ class MarkerPopup extends React.Component {
                     </InputGroup>
   }
 
+  returnDescriptionValue = () => {
+    const { marker } = this.props;
+    const { editedMarker } = this.state;
+
+    if(editedMarker.description) return editedMarker.description;
+    else if(marker.description === null) return '';
+    else if(marker.description) return marker.description;
+  }
+
   returnDescription = () => {
     const { show } = this.state;
     const { marker } = this.props;
-    const { editedMarker } = this.state;
 
     if(show) return <Form onSubmit={this.editMarkerDescription}>
                       <FormControl
                       type="text"
                       placeholder="Description"
-                      value={editedMarker.description?editedMarker.description:marker.description}
+                      value={this.returnDescriptionValue()}
                       onChange={this.descriptionHandler}
                       />
                     </Form>

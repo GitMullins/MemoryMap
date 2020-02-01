@@ -55,5 +55,5 @@ const editUser = (editedUserObj) => new Promise((resolve) => {
 export default {
     addUser,
     logInUser,
-    editUser
+    editUser,
 };
