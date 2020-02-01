@@ -67,5 +67,17 @@ namespace MemoryMap.api.Repositories
                 return user;
             }
         }
+
+        public bool EditUser(User editedUser)
+        {
+            using (var db = new SqlConnection(_connectionString))
+            {
+                var sql = @"UPDATE [User]
+                            SET [Email] = @email
+                            WHERE [Id] = @id";
+
+                return db.Execute(sql, editedUser) == 1;
+            }
+        }
     }
 }
