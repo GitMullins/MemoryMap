@@ -8,6 +8,7 @@ import 'firebase/auth';
 import UserData from '../../Helpers/Data/UserData';
 import Auth from '../Auth/Auth';
 import Home from '../Home/Home';
+import Countries from '../Countries/Countries';
 import './App.scss';
 
 import fbConnect from '../../Helpers/Data/fbConnection';
@@ -71,11 +72,11 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        {/* <Home/> */}
         <Router>
           <Switch>
             <PublicRoute path='/auth' component={ Auth } authed={authed} userObj={userObj} logIn={this.logIn}/>
             <PrivateRoute path='/home' component={ Home } authed={authed} userObj={userObj} />
+            <PrivateRoute path='/countries' component={ Countries } authed={authed} userObj={userObj} />
             <Redirect from='*' to='/auth'/>
           </Switch>
         </Router>

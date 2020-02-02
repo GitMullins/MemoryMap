@@ -69,6 +69,20 @@ namespace MemoryMap.api.Repositories
             }
         }
 
+        public IEnumerable<string> GetAllCountriesByUid(Guid userId)
+        {
+            using (var db = new SqlConnection(_connectionString))
+            {
+                var sql = @"SELECT DISTINCT [Country]
+                            FROM [Picture]
+                            WHERE [UserId] = @userId";
+
+                var parameters = new { userId };
+                var markers = db.Query<string>(sql, parameters);
+                return markers;
+            }
+        }
+
         public bool PutPictureByMarkerId(Guid editedMarkerId, byte[] file)
         {
             using (var db = new SqlConnection(_connectionString))
