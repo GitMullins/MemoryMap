@@ -45,6 +45,13 @@ namespace MemoryMap.api.Controllers
             return _repo.GetAllMarkersByUid(userId);
         }
 
+        // GET: api/Picture
+        [HttpGet("allCountries/{userId}")]
+        public IEnumerable<string> GetAllCountriesByUid(Guid userId)
+        {
+            return _repo.GetAllCountriesByUid(userId);
+        }
+
         // POST: api/Picture
         [HttpPost("newMarker")]
         public IActionResult AddMarker(AddNewMarkerDto newMarker)

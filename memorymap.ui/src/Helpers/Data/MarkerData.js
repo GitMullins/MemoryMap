@@ -23,6 +23,12 @@ const getAllMarkersByUid = uid => new Promise((resolve, reject) => {
         .catch(err => reject(err));
 });
 
+const getAllCountriesByUid = uid => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/allCountries/${uid}`)
+      .then(result => resolve(result.data))
+      .catch(err => reject(err));
+});
+
 const addMarker = newMarkerObj => new Promise((resolve, reject) => {
   const geocodeApi = apiKeys.googleReverseGeocodeKey.apiKey;
   const api = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${newMarkerObj.latitude},${newMarkerObj.longitude}&result_type=country&key=${geocodeApi}`
@@ -66,5 +72,6 @@ export default {
     putPicture,
     getMarkerByMarkerId,
     deleteMarkerByMarkerId,
-    editMarkerDescription
+    editMarkerDescription,
+    getAllCountriesByUid
 };
