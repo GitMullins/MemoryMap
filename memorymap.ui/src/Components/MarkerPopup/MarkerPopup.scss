@@ -1,11 +1,33 @@
 .marker-picture {
   object-fit:scale-down;
-  height: 40em;
-  width: 40em;
+  height: 60%;
+  width: 100%;
 }
 
 .popup-sub {
   justify-content: center;
   height: 40em;
   width: 45em;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  line-height: 1.4;
+  width: 100% !important;
+}
+
+.location-text {
+  display: flex;
+}
+
+.country-text{
+  margin: 0 !important;
+  text-align:right;
+}
+
+.latlng-txt{
+  text-align:right;
+  margin: 0 !important;
+  margin-top: auto !important;
+  margin-left: auto;
 }

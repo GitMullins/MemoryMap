@@ -111,14 +111,20 @@ class MarkerPopup extends React.Component {
 
     return (
         <Popup
-        className="popup-sub">
+        className="popup-sub container">
           { this.returnChooseFileBtn() }
           { this.returnImage() }
           { this.returnDescription() }
-          <p>lat: {marker.latitude} <br/>long: {marker.longitude}</p>
-          <h5>{marker.country}</h5>
-          <Button onClick={this.deleteMarker} className="btn-danger">Delete Marker</Button>
-          <Button onClick={this.editMarkerBtn} className="btn-primary">Edit Marker</Button>
+          <div className="row location-text">
+          <h5 className="col country-text">{marker.country}</h5>
+          </div>
+          <div className="row">
+          <p className="col latlng-txt">lat: {marker.latitude} <br/>long: {marker.longitude}</p>
+          </div>
+          <div className="col edit-delete-btns">
+          <Button onClick={this.deleteMarker} className="btn-danger row">Delete Marker</Button>
+          <Button onClick={this.editMarkerBtn} className="btn-primary row">Edit Marker</Button>
+          </div>
         </Popup>
     );
   }
