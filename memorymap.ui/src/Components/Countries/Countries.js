@@ -10,6 +10,8 @@ import NavbarMap from '../NavbarMap/NavbarMap';
 import CountryCard from '../CountryCard/CountryCard';
 import MarkerData from '../../Helpers/Data/MarkerData';
 
+import './Countries.scss';
+
 class Countries extends React.Component {
   state = {
     countries: [],
@@ -33,68 +35,30 @@ class Countries extends React.Component {
     .catch(err => console.error(err, 'did not get all markers in Countries'));
   }
 
-  // cardBuilder = () => {
-  //   const { countries } = this.state;
-  //   const {markers } = this.state;
-  //   countries.forEach((country) => {
-  //     const countryMarkers = markers.filter(arrayItem => arrayItem.country === country);
-  //     countryMarkers.map((marker) => (
-  //           <CountryCard
-  //           key={marker.id}
-  //           marker={marker}
-  //           />
-  //     ))
-  //   })
-  // }
-
   render() {
     const { countries } = this.state;
     const {markers } = this.state;
 
-    // const cardBuilder = countries.map((country) => {
-    //                       console.error(country);
-    //                       const countryMarkers = markers.filter(arrayItem => arrayItem.country === country);
-    //                       countryMarkers.map((marker) => {
-    //                           return <div>
-    //                             <h3>{country}</h3>
-    //                             <CountryCard
-    //                             key={marker.id}
-    //                             marker={marker}
-    //                             />
-    //                           </div>
-    //                       })
-    //                     })
-
-    // const { countries } = this.state;
-    // const {markers } = this.state;
-
-    // const   cardBuilder = markers.map((marker) => (
-              // <CountryCard
-              // key={marker.id}
-              // marker={ marker }
-              // />
-    //     ))
-      // })
-  
+    const countryCards = countries.map((country, i) => (
+      <div key={i} className="country-container container-fluid">
+        <div className="row country-title">
+          <h3>{country}</h3>
+        </div>
+        <div className="row country-card">
+          {markers.filter(arrayItem => arrayItem.country === country)
+          .map((marker) => (
+            <CountryCard
+            key={marker.id}
+            marker={ marker }
+            />
+          ))}
+        </div>
+      </div>
+    ));
   
       return (
         <div>
-          {
-            this.state.countries.map((country, i) => (
-              <div key={i} className="card">
-                <div className="card-body">
-                  <h3>{country}</h3>
-                  {markers.filter(arrayItem => arrayItem.country === country)
-                  .map((marker) => (
-                    <CountryCard
-                    key={marker.id}
-                    marker={ marker }
-                    />
-                  ))}
-                </div>
-              </div>
-            ))
-          }
+          { countryCards }
         </div>
       );
     }
