@@ -1,0 +1,33 @@
+.country-container {
+  margin-left: 0;
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.country-card {
+  justify-content: left;
+  height: 100%;
+  width: 100%;
+  flex-direction: row;
+}
+
+.card-details {
+  display: flex;
+  flex-direction: row;
+}
+
+.country-title {
+  display: flex;
+  margin-left: 0;
+  margin-right: 0;
+  width: 150px;
+  text-align: center;
+  align-items: center;
+}
+
+.country-picture {
+  max-width: 100%;
+  margin: 5px 5px 30px;
+}
+
