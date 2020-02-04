@@ -13,18 +13,35 @@ class NavbarMap extends React.Component {
     editAccountModalOpen: false
   }
 
-  returnButtonValue = () => {
+  returnMarkerBtn = () => {
+    if(window.location.pathname === '/home')
+    return  <Button
+              className={`${this.returnMarkerBtnColor()} add-marker-btn`}
+              onClick={this.props.allowMarkerPlacement}>
+              {this.returnMarkerBtnValue()}
+            </Button>
+  }
+
+  returnMarkerBtnValue = () => {
     const { addMarker } = this.props;
     if(addMarker) {
       return 'Cancel'
     } else return 'Add Marker'
   }
 
-  returnButtonColor = () => {
+  returnMarkerBtnColor = () => {
     const { addMarker } = this.props;
     if(addMarker) {
       return 'btn-danger btn';
     } else return 'btn-primary btn';
+  }
+
+  returnMapOrHome = () => {
+    if(window.location.pathname === '/home'){
+      return <NavLink className="countries-link btn btn-secondary" tag={RRNavLink} to={'/countries'}>Countries</NavLink>
+    } else if(window.location.pathname === '/countries'){
+      return <NavLink className="countries-link btn btn-secondary" tag={RRNavLink} to={'/home'}>Map</NavLink>
+    }
   }
 
   logOut = (e) => {
@@ -33,10 +50,6 @@ class NavbarMap extends React.Component {
   }
 
   render() {
-    // const { userObj } = this.props;
-    // const countries = () => {if(userObj){
-    // return `/countries/${userObj.id}`;
-    // } else return '/countries'}
     let closeEditAccountModal = () => this.setState({ editAccountModalOpen: false });
 
       return (
@@ -44,15 +57,10 @@ class NavbarMap extends React.Component {
         <div className="row"></div>
         <div className="col-6 col-md-4"></div>
         <div className="col-6 col-md-4">
-          <Button
-            className={`${this.returnButtonColor()} add-marker-btn`}
-            onClick={this.props.allowMarkerPlacement}
-          >
-            {this.returnButtonValue()}
-          </Button>
+          {this.returnMarkerBtn()}
           </div>
         <div className="navMap-btns-right col-6 col-md-4">
-          <NavLink className="countries-link btn btn-secondary" tag={RRNavLink} to={'/countries'}>Countries</NavLink>
+          {this.returnMapOrHome()}
           <Button
           className="btn-secondary"
           onClick={() => this.setState({ editAccountModalOpen: true })}

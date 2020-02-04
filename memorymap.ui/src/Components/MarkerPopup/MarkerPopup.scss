@@ -1,9 +1,3 @@
-.marker-picture {
-  object-fit:scale-down;
-  height: 60%;
-  width: 100%;
-}
-
 .popup-sub {
   justify-content: center;
   height: 40em;
@@ -14,6 +8,23 @@
   margin: 0 !important;
   line-height: 1.4;
   width: 100% !important;
+}
+
+.marker-picture-container {
+  align-items: baseline;
+  justify-content: flex-end;
+}
+
+.marker-picture {
+  object-fit:scale-down;
+  height: 60%;
+  width: 100%;
+}
+
+.delete-picture-btn {
+  position: absolute;
+  display: flex;
+  margin: 0;
 }
 
 .location-text {

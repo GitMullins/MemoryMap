@@ -30,6 +30,12 @@ class MarkerPopup extends React.Component {
     .catch((err) => console.error('could not delete marker', err));
   }
 
+  deletePicture = () => {
+    MarkerData.deletePictureByMarkerId(this.props.marker.id)
+    .then(() => this.props.displayAllMarkers())
+    .catch((err) => console.error('could not delete picture', err));
+  }
+
   editMarkerDescription = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -67,7 +73,10 @@ class MarkerPopup extends React.Component {
   returnImage = () => {
     const { marker } = this.props;
     if(marker.image) {
-      return <img className="marker-picture" alt="in country pic" src={`data:image/jpg;base64,${marker.image}`}/>
+      return <div className="marker-picture-container" style={{ position: "relative", display: "flex" }} >
+        <img className="marker-picture" alt="in country pic" src={`data:image/jpg;base64,${marker.image}`}/>
+        {this.state.show?<Button className="delete-picture-btn btn-danger" onClick={this.deletePicture}>x</Button>:null}
+        </div>
     }
   }
 
@@ -108,6 +117,17 @@ class MarkerPopup extends React.Component {
 
   render() {
     const { marker } = this.props;
+
+    // const returnImage = (
+    //   <div>
+    //     {if(marker.image) {
+    //     return <div className="marker-picture-container" style={{ position: "relative", display: "flex" }} >
+    //       <img className="marker-picture" alt="in country pic" src={`data:image/jpg;base64,${marker.image}`}/>
+    //       {()=> {if(this.state.show) return <Button className="delete-picture-btn btn-danger">x</Button>}}
+    //       </div>
+    //   }}
+    //   </div>
+    // )
 
     return (
         <Popup

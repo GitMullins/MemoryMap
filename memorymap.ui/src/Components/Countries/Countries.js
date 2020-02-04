@@ -44,7 +44,7 @@ class Countries extends React.Component {
         <div className="row country-title">
           <h3>{country}</h3>
         </div>
-        <div className="row country-card">
+        <div className="row card country-card">
           {markers.filter(arrayItem => arrayItem.country === country)
           .map((marker) => (
             <CountryCard
@@ -58,6 +58,7 @@ class Countries extends React.Component {
   
       return (
         <div>
+          <NavbarMap/>
           { countryCards }
         </div>
       );

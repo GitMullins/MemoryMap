@@ -54,6 +54,13 @@ const deleteMarkerByMarkerId = markerId => new Promise((resolve, reject) => {
   .catch(err => reject(err));
 })
 
+const deletePictureByMarkerId = markerId => new Promise((resolve, reject) => {
+  axios.put(`${baseUrl}/deletePicture/${markerId}`)
+  .then(result => resolve(result.data))
+  .catch(err => reject(err));
+})
+
+
 const editMarkerDescription = (markerId, marker) => new Promise((resolve, reject) => {
   const config = {
     headers: {
@@ -73,5 +80,6 @@ export default {
     getMarkerByMarkerId,
     deleteMarkerByMarkerId,
     editMarkerDescription,
-    getAllCountriesByUid
+    getAllCountriesByUid,
+    deletePictureByMarkerId
 };
