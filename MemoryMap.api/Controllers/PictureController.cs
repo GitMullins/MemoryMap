@@ -83,6 +83,20 @@ namespace MemoryMap.api.Controllers
             return Ok();
         }
 
+        [HttpPut("deletePicture/{markerId}")]
+        public IActionResult DeletePictureByMarkerId(Guid markerId)
+        {
+            if (_repo.DeletePictureByMarkerId(markerId))
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+
         // PUT: api/
         [HttpPut("editDescription/{markerId}")]
         public IActionResult EditDescription(Guid markerId, [FromBody] string markerDescription)

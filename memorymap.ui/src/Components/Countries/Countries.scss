@@ -14,7 +14,8 @@
 
 .card-details {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  text-align: center;
 }
 
 .country-title {
@@ -28,6 +29,6 @@
 
 .country-picture {
   max-width: 100%;
-  margin: 5px 5px 30px;
+  margin: 5px 5px;
 }
 
