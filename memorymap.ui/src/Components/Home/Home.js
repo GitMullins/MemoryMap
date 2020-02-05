@@ -55,6 +55,22 @@ class Home extends React.Component {
     }
   }
 
+  cursorDisplay = () => {
+    const cursor = document.getElementById('cursor');
+    if(cursor) {
+    if(this.state.addMarker) {
+      cursor.display = "";
+      document.addEventListener('mousemove', e => {
+          cursor.setAttribute("style", "top: "+(e.pageY - 10)+"px; left: "+(e.pageX - 10)+"px;");
+      })
+    } else if(!this.state.addMarker) {
+        document.addEventListener('mousemove', () => {
+        cursor.style.display = "none";
+        })
+      }
+    }
+  }
+
   allowMarkerPlacement = () => {
     this.setState({ addMarker: !this.state.addMarker });
   }
@@ -83,15 +99,18 @@ class Home extends React.Component {
         />
       </Marker>
     ));
-
+    
     return (
       <div className="map-navbar-container">
+        <div id="cursor"/>
         <Map
+        style={ addMarker?{cursor:'pointer'} : null }
         className="map"
         center={[47.5162, 14.5501]}
         zoom={this.state.zoom}
         onClick={this.addMarkerOnMap}
         >
+                  {this.cursorDisplay()}
           <TileLayer 
           attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/copyright&quot;>OpenStreetMap</a> contributors, Tiles style by <a href=&quot;https://www.hotosm.org/&quot; target=&quot;_blank&quot;>Humanitarian OpenStreetMap Team</a> hosted by <a href=&quot;https://openstreetmap.fr/&quot; target=&quot;_blank&quot;>OpenStreetMap France</a>"
           url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"

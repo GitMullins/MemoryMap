@@ -18,3 +18,44 @@
   height: 40em;
   width: 45em;
 }
+
+#cursor {
+  width: 20px;
+  height: 20px;
+  border: 4px solid red;
+  border-radius: 50%;
+  position: absolute;
+  animation: cursorAnim .5s infinite alternate;
+  pointer-events: none;
+}
+
+
+#cursor::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  border: 7px solid blue;
+  border-radius: 50%;
+  top: -4px;
+  left: -4px;
+  animation: cursorAnim2 .5s infinite alternate;
+}
+
+@keyframes cursorAnim {
+  from {
+      transform: scale(0);
+  }
+  to {
+      transform: scale(1.8);
+  }
+}
+
+@keyframes cursorAnim2 {
+  from {
+      transform: scale(1);
+  }
+  to {
+      transform: scale(.4);
+  }
+}
