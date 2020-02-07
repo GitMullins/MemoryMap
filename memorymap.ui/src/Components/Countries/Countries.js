@@ -1,10 +1,5 @@
 import React from 'react';
-// import { Button } from 'react-bootstrap';
-// import { NavLink as RRNavLink } from 'react-router-dom';
-// import EditAccountModal from '../EditAccountModal/EditAccountModal';
-// import 'firebase/auth';
-// import firebase from 'firebase/app';
-// import { Navbar, NavLink } from 'reactstrap';
+import { UncontrolledCollapse, Button } from 'reactstrap';
 
 import NavbarMap from '../NavbarMap/NavbarMap';
 import CountryCard from '../CountryCard/CountryCard';
@@ -35,16 +30,40 @@ class Countries extends React.Component {
     .catch(err => console.error(err, 'did not get all markers in Countries'));
   }
 
+  collapseAll = () => {
+    const toggleBtns = document.getElementsByClassName('toggle-btn');
+    const collapsible = document.getElementsByClassName('country-card');
+    for (let i=0; i<toggleBtns.length; i++) {
+      if(collapsible[i].classList.contains("show")) {
+      toggleBtns[i].click();
+      }
+    }
+  }
+
+  expandAll = () => {
+    const toggleBtns = document.getElementsByClassName('toggle-btn');
+    const expandible = document.getElementsByClassName('country-card');
+    for (let i=0; i<toggleBtns.length; i++) {
+      if(!expandible[i].classList.contains("show")) {
+      toggleBtns[i].click();
+      }
+    }  
+  }
+
   render() {
     const { countries } = this.state;
     const {markers } = this.state;
 
     const countryCards = countries.map((country, i) => (
       <div key={i} className="country-container container-fluid">
-        <div className="row country-title">
-          <h3>{country}</h3>
+        <div className="country-title">
+          <Button className="col toggle-btn"
+          color="outline-primary"
+          id={`toggler-${i}`}
+          >{country}
+          </Button>
         </div>
-        <div className="row card country-card">
+        <UncontrolledCollapse className="row card country-card" toggler={`#toggler-${i}`}>
           {markers.filter(arrayItem => arrayItem.country === country)
           .map((marker) => (
             <CountryCard
@@ -52,14 +71,20 @@ class Countries extends React.Component {
             marker={ marker }
             />
           ))}
-        </div>
+        </UncontrolledCollapse>
       </div>
     ));
   
       return (
         <div>
           <NavbarMap/>
-          { countryCards }
+          {markers.length > 0 &&
+            <div>
+              <Button onClick={this.expandAll}>Expand All</Button>
+              <Button onClick={this.collapseAll}>Collapse All</Button>
+              { countryCards }
+            </div>
+          }
         </div>
       );
     }
