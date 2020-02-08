@@ -118,32 +118,23 @@ class MarkerPopup extends React.Component {
   render() {
     const { marker } = this.props;
 
-    // const returnImage = (
-    //   <div>
-    //     {if(marker.image) {
-    //     return <div className="marker-picture-container" style={{ position: "relative", display: "flex" }} >
-    //       <img className="marker-picture" alt="in country pic" src={`data:image/jpg;base64,${marker.image}`}/>
-    //       {()=> {if(this.state.show) return <Button className="delete-picture-btn btn-danger">x</Button>}}
-    //       </div>
-    //   }}
-    //   </div>
-    // )
-
     return (
         <Popup
         className="popup-sub container">
           { this.returnChooseFileBtn() }
           { this.returnImage() }
-          { this.returnDescription() }
-          <div className="row location-text">
-          <h5 className="col country-text">{marker.country}</h5>
+          <div className="hidden-card">
+            { this.returnDescription() }
+            <div className="row location-text">
+            <h5 className="col country-text">{marker.country}</h5>
+            </div>
+            <div className="row">
+            <p className="col latlng-txt">lat: {marker.latitude} <br/>long: {marker.longitude}</p>
+            </div>
+            <div className="col edit-delete-btns">
+            <button onClick={this.deleteMarker} className="btn btn-outline-danger marker-btns row">Delete Marker</button>
+            <button onClick={this.editMarkerBtn} className="btn btn-outline-info marker-btns row">Edit Marker</button>
           </div>
-          <div className="row">
-          <p className="col latlng-txt">lat: {marker.latitude} <br/>long: {marker.longitude}</p>
-          </div>
-          <div className="col edit-delete-btns">
-          <Button onClick={this.deleteMarker} className="btn-danger row">Delete Marker</Button>
-          <Button onClick={this.editMarkerBtn} className="btn-primary row">Edit Marker</Button>
           </div>
         </Popup>
     );

@@ -6,12 +6,13 @@ import MarkerData from '../../Helpers/Data/MarkerData';
 import NavbarMap from '../NavbarMap/NavbarMap';
 
 import './Home.scss';
+import 'leaflet/dist/leaflet.css';
 
 const myIcon = L.icon({
-  iconUrl: '../cameraMarker.png',
   iconSize: [25, 41],
-  // iconAnchor: [22, 94],
-  popupAnchor: [-10, -90],
+  // iconAnchor: [10, 41],
+  popupAnchor: [2, -40],
+  iconUrl: 'https://unpkg.com/leaflet@1.5.1/dist/images/marker-icon.png'
 });
 
 const defaultMarker = {
