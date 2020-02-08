@@ -4,11 +4,38 @@
   width: 45em;
 }
 
+.leaflet-popup-content-wrapper {
+  background: transparent
+}
+
+.leaflet-popup-content-wrapper:hover{
+  background: rgba($color: #f0ebeb, $alpha: 1.0);
+  opacity: (1);
+  .hidden-card {
+    display: block;
+  }  
+  // filter: brightness(100%);
+  // z-index: 100;
+  .leaflet-popup-content-wrapper:before{
+    filter: brightness(50%);
+  }
+}
+
+// .leaflet-tile-pane {
+//   filter: brightness(50%);
+// }
+
+.hidden-card {
+  display: none;
+}
+
 .leaflet-popup-content {
   margin: 0 !important;
   line-height: 1.4;
   width: 100% !important;
+  background: border-box;
 }
+
 
 .marker-picture-container {
   align-items: baseline;
@@ -41,4 +68,8 @@
   margin: 0 !important;
   margin-top: auto !important;
   margin-left: auto;
+}
+
+.marker-btns {
+  background-color: none !important;
 }
