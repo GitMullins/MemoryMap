@@ -1,3 +1,14 @@
+.darken-map {
+  background-color: rgba(236, 181, 181, 0.3);
+  width: 200vw;
+  position: absolute;
+  height: 150vw;
+  margin-left: calc(-50vw + 50%);
+  margin-top: calc(-50vw + 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
 .popup-sub {
   justify-content: center;
   height: 40em;
@@ -9,21 +20,12 @@
 }
 
 .leaflet-popup-content-wrapper:hover{
-  background: rgba($color: #f0ebeb, $alpha: 1.0);
+  background: rgba($color: #ffffff, $alpha: 1.0);
   opacity: (1);
   .hidden-card {
     display: block;
   }  
-  // filter: brightness(100%);
-  // z-index: 100;
-  .leaflet-popup-content-wrapper:before{
-    filter: brightness(50%);
-  }
 }
-
-// .leaflet-tile-pane {
-//   filter: brightness(50%);
-// }
 
 .hidden-card {
   display: none;

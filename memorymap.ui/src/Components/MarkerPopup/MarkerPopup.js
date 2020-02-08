@@ -1,5 +1,5 @@
 import React from 'react';
-import  { Popup } from 'react-leaflet';
+import  { Popup, MapLayer } from 'react-leaflet';
 import { Button, Form, FormControl, InputGroup } from 'react-bootstrap';
 import MarkerData from '../../Helpers/Data/MarkerData';
 
@@ -115,10 +115,25 @@ class MarkerPopup extends React.Component {
     else if(show!==true) return <h5>{marker.description}</h5>
   }
 
+  mouseOver = () => {
+    const map = document.getElementsByClassName("darken-map");
+    const popup = document.getElementsByClassName("popup-sub");
+    if(map) map[0].style.filter = "brightness(50%)";
+  }
+
+  mouseLeave = () => {
+    const map = document.getElementsByClassName("darken-map");
+    if(map) map[0].style.filter = "brightness(100%)";
+  }
+
   render() {
     const { marker } = this.props;
 
     return (
+      <div
+      // onMouseOver={this.mouseOver}
+      // onMouseLeave={this.mouseLeave}
+      >
         <Popup
         className="popup-sub container">
           { this.returnChooseFileBtn() }
@@ -134,9 +149,11 @@ class MarkerPopup extends React.Component {
             <div className="col edit-delete-btns">
             <button onClick={this.deleteMarker} className="btn btn-outline-danger marker-btns row">Delete Marker</button>
             <button onClick={this.editMarkerBtn} className="btn btn-outline-info marker-btns row">Edit Marker</button>
+            <div className="darken-map"></div>
           </div>
           </div>
         </Popup>
+        </div>
     );
   }
 }

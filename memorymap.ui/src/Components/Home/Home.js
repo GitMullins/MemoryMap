@@ -111,7 +111,7 @@ class Home extends React.Component {
         zoom={this.state.zoom}
         onClick={this.addMarkerOnMap}
         >
-                  {this.cursorDisplay()}
+            {this.cursorDisplay()}
           <TileLayer 
           attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/copyright&quot;>OpenStreetMap</a> contributors, Tiles style by <a href=&quot;https://www.hotosm.org/&quot; target=&quot;_blank&quot;>Humanitarian OpenStreetMap Team</a> hosted by <a href=&quot;https://openstreetmap.fr/&quot; target=&quot;_blank&quot;>OpenStreetMap France</a>"
           url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
