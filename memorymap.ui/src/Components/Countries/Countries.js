@@ -4,6 +4,7 @@ import { UncontrolledCollapse, Button } from 'reactstrap';
 import NavbarMap from '../NavbarMap/NavbarMap';
 import CountryCard from '../CountryCard/CountryCard';
 import MarkerData from '../../Helpers/Data/MarkerData';
+import countriesHeader from '../../Images/countries-header.jpg';
 
 import './Countries.scss';
 
@@ -76,10 +77,13 @@ class Countries extends React.Component {
     ));
   
       return (
-        <div>
+        <div className="countries-header-container">
           <NavbarMap/>
+            <img className="countries-header-img" alt="world" src={countriesHeader}/>
+            <h1 className="countries-header-text">Countries Visited</h1>
+            <div className="countries-header-spacer"/>
           {markers.length > 0 &&
-            <div>
+            <div className="expand-collapse-btns">
               <Button onClick={this.expandAll}>Expand All</Button>
               <Button onClick={this.collapseAll}>Collapse All</Button>
               { countryCards }
