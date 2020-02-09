@@ -33,7 +33,7 @@ class Countries extends React.Component {
 
   collapseAll = () => {
     const toggleBtns = document.getElementsByClassName('toggle-btn');
-    const collapsible = document.getElementsByClassName('country-card');
+    const collapsible = document.getElementsByClassName('country-card-container');
     for (let i=0; i<toggleBtns.length; i++) {
       if(collapsible[i].classList.contains("show")) {
       toggleBtns[i].click();
@@ -43,7 +43,7 @@ class Countries extends React.Component {
 
   expandAll = () => {
     const toggleBtns = document.getElementsByClassName('toggle-btn');
-    const expandible = document.getElementsByClassName('country-card');
+    const expandible = document.getElementsByClassName('country-card-container');
     for (let i=0; i<toggleBtns.length; i++) {
       if(!expandible[i].classList.contains("show")) {
       toggleBtns[i].click();
@@ -64,10 +64,11 @@ class Countries extends React.Component {
           >{country}
           </Button>
         </div>
-        <UncontrolledCollapse className="row card country-card" toggler={`#toggler-${i}`}>
+        <UncontrolledCollapse className="row card country-card-container" toggler={`#toggler-${i}`}>
           {markers.filter(arrayItem => arrayItem.country === country)
           .map((marker) => (
             <CountryCard
+            className="country-card"
             key={marker.id}
             marker={ marker }
             />
