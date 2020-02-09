@@ -4,6 +4,7 @@ import { UncontrolledCollapse, Button } from 'reactstrap';
 import NavbarMap from '../NavbarMap/NavbarMap';
 import CountryCard from '../CountryCard/CountryCard';
 import MarkerData from '../../Helpers/Data/MarkerData';
+import countriesHeader from '../../Images/countries-header.jpg';
 
 import './Countries.scss';
 
@@ -32,7 +33,7 @@ class Countries extends React.Component {
 
   collapseAll = () => {
     const toggleBtns = document.getElementsByClassName('toggle-btn');
-    const collapsible = document.getElementsByClassName('country-card');
+    const collapsible = document.getElementsByClassName('country-card-container');
     for (let i=0; i<toggleBtns.length; i++) {
       if(collapsible[i].classList.contains("show")) {
       toggleBtns[i].click();
@@ -42,7 +43,7 @@ class Countries extends React.Component {
 
   expandAll = () => {
     const toggleBtns = document.getElementsByClassName('toggle-btn');
-    const expandible = document.getElementsByClassName('country-card');
+    const expandible = document.getElementsByClassName('country-card-container');
     for (let i=0; i<toggleBtns.length; i++) {
       if(!expandible[i].classList.contains("show")) {
       toggleBtns[i].click();
@@ -63,10 +64,11 @@ class Countries extends React.Component {
           >{country}
           </Button>
         </div>
-        <UncontrolledCollapse className="row card country-card" toggler={`#toggler-${i}`}>
+        <UncontrolledCollapse className="row card country-card-container" toggler={`#toggler-${i}`}>
           {markers.filter(arrayItem => arrayItem.country === country)
           .map((marker) => (
             <CountryCard
+            className="country-card"
             key={marker.id}
             marker={ marker }
             />
@@ -76,10 +78,13 @@ class Countries extends React.Component {
     ));
   
       return (
-        <div>
+        <div className="countries-header-container">
           <NavbarMap/>
+            <img className="countries-header-img" alt="world" src={countriesHeader}/>
+            <h1 className="countries-header-text">Countries Visited</h1>
+            <div className="countries-header-spacer"/>
           {markers.length > 0 &&
-            <div>
+            <div className="expand-collapse-btns">
               <Button onClick={this.expandAll}>Expand All</Button>
               <Button onClick={this.collapseAll}>Collapse All</Button>
               { countryCards }
