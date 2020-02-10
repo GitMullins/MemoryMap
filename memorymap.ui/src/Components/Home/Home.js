@@ -4,6 +4,7 @@ import { Map, TileLayer, Marker } from 'react-leaflet';
 import MarkerPopup from '../MarkerPopup/MarkerPopup';
 import MarkerData from '../../Helpers/Data/MarkerData';
 import NavbarMap from '../NavbarMap/NavbarMap';
+import Search from "react-leaflet-search";
 
 import './Home.scss';
 import 'leaflet/dist/leaflet.css';
@@ -111,6 +112,14 @@ class Home extends React.Component {
         zoom={this.state.zoom}
         onClick={this.addMarkerOnMap}
         >
+            <Search
+            className={"search-bar"}
+            inputPlaceholder="Address Search"
+            showMarker={false}
+            openSearchOnLoad={true}
+            zoom={17}
+            position={"topleft"}
+            />
             {this.cursorDisplay()}
           <TileLayer 
           attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/copyright&quot;>OpenStreetMap</a> contributors, Tiles style by <a href=&quot;https://www.hotosm.org/&quot; target=&quot;_blank&quot;>Humanitarian OpenStreetMap Team</a> hosted by <a href=&quot;https://openstreetmap.fr/&quot; target=&quot;_blank&quot;>OpenStreetMap France</a>"

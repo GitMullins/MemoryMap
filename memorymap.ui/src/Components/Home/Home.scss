@@ -15,6 +15,16 @@
   z-index: -1;
 }
 
+.search-bar {
+  left: 20px;
+  top: 0;
+}
+
+.leaflet-control {
+  float: left;
+  clear: none;
+}
+
 .add-marker-btn{
     border-radius: 50%;
   }
