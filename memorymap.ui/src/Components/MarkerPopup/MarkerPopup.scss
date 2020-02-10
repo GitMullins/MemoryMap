@@ -16,12 +16,15 @@
 }
 
 .leaflet-popup-content-wrapper {
-  background: transparent
+  background: transparent;
+  transform: scale(1.2,1.2) !important;
+
 }
 
 .leaflet-popup-content-wrapper:hover{
   background: rgba($color: #ffffff, $alpha: 1.0);
   opacity: (1);
+  transform: scale(1,1) !important;
   .hidden-card {
     display: block;
   }  
