@@ -10,7 +10,7 @@ import 'leaflet/dist/leaflet.css';
 
 const myIcon = L.icon({
   iconSize: [25, 41],
-  // iconAnchor: [10, 41],
+  iconAnchor: [10, 41],
   popupAnchor: [2, -40],
   iconUrl: 'https://unpkg.com/leaflet@1.5.1/dist/images/marker-icon.png'
 });
