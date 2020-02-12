@@ -10,9 +10,9 @@
 }
 
 .leaflet-popup-content-wrapper:hover{
-  background: rgba($color: #ffffff, $alpha: 1.0);
+  background-color: antiquewhite;
   opacity: (1);
-  transform: scale(.9,.8) !important;
+  transform: scale(1.2,1.1) !important;
   .hidden-card {
     display: block;
   }  
@@ -49,25 +49,41 @@
 
 .location-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  background-color: antiquewhite;
+}
+
+.description-form-input{
+  width: auto;
+  overflow-wrap: break-word;
+}
+
+.marker-description {
+  // background-color: white;
+  font-weight: 550;
+  margin-bottom: 0;
+  margin-top: 5px;
 }
 
 .country-text{
   flex-grow: 0;
-  background-color: white;
+  // background-color: white;
   margin: 0 !important;
   text-align:right;
   font-weight: bold;
   color: blue;
 }
 
-.latlng-txt{
-  text-align:right;
-  margin: 0 !important;
-  margin-top: auto !important;
-  margin-left: auto;
+.edit-delete-latlng {
+  margin: 0;
 }
 
 .marker-btns {
+  align-self: flex-end;
+  flex-grow: 1;
   background-color: none !important;
+  width: 50%;
+  height: 50%;
 }
