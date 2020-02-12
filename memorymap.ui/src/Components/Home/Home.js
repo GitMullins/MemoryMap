@@ -32,7 +32,7 @@ class Home extends React.Component {
     zoom: 3,
     addMarker: false,
     newMarker: defaultMarker,
-    allMarkers: []
+    allMarkers: [],
   }
 
   componentDidMount() {
@@ -60,15 +60,15 @@ class Home extends React.Component {
   cursorDisplay = () => {
     const cursor = document.getElementById('cursor');
     if(cursor) {
-    if(this.state.addMarker) {
-      cursor.display = "";
-      document.addEventListener('mousemove', e => {
-          cursor.setAttribute("style", "top: "+(e.pageY - 10)+"px; left: "+(e.pageX - 10)+"px;");
-      })
-    } else if(!this.state.addMarker) {
-        document.addEventListener('mousemove', () => {
-        cursor.style.display = "none";
-        })
+      if(this.state.addMarker) {
+        cursor.display = "";
+        document.addEventListener('mousemove', e => {
+            cursor.setAttribute("style", "top: "+(e.pageY - 10)+"px; left: "+(e.pageX - 10)+"px;");
+        });
+      } else if(!this.state.addMarker) {
+          document.addEventListener('mousemove', () => {
+          cursor.style.display = "none";
+          });
       }
     }
   }
@@ -113,7 +113,7 @@ class Home extends React.Component {
         onClick={this.addMarkerOnMap}
         >
             <Search
-            className={"search-bar"}
+            className="search-bar"
             inputPlaceholder="Address Search"
             showMarker={false}
             openSearchOnLoad={true}

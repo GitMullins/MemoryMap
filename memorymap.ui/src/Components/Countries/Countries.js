@@ -61,7 +61,7 @@ class Countries extends React.Component {
           <Button className="col toggle-btn"
           color="outline-primary"
           id={`toggler-${i}`}
-          >{country}
+          >{country?country:'Open Sea'}
           </Button>
         </div>
         <UncontrolledCollapse className="row card country-card-container" toggler={`#toggler-${i}`}>
