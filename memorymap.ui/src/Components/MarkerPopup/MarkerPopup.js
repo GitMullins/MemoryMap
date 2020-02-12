@@ -91,6 +91,13 @@ class MarkerPopup extends React.Component {
                     </InputGroup>
   }
 
+  onEnterPress = (e) => {
+    if(e.keyCode === 13 && e.shiftKey === false) {
+      e.preventDefault();
+      this.editMarkerDescription(e);
+    }
+  }
+
   returnDescriptionValue = () => {
     const { marker } = this.props;
     const { editedMarker } = this.state;
@@ -104,50 +111,59 @@ class MarkerPopup extends React.Component {
     const { show } = this.state;
     const { marker } = this.props;
 
-    if(show) return <Form onSubmit={this.editMarkerDescription}>
+    if(show) return <Form 
+                      id="description-form">
                       <FormControl
-                      type="text"
+                      className="description-form-input"
+                      as="textarea"
                       placeholder="Description"
                       value={this.returnDescriptionValue()}
                       onChange={this.descriptionHandler}
+                      onKeyDown={this.onEnterPress}
                       />
                     </Form>
-    else if(show!==true) return <h5>{marker.description}</h5>
+    else if(show!==true) return <h5 className="col marker-description">{marker.description}</h5>
   }
 
   mouseOver = () => {
-    const map = document.getElementsByClassName("darken-map");
-    if(map) map[0].style.filter = "brightness(50%)";
+    const map = document.getElementsByClassName("leaflet-layer");
+    if(map) map[0].style.filter = "brightness(40%)";
   }
 
   mouseLeave = () => {
-    const map = document.getElementsByClassName("darken-map");
-    if(map) map[0].style.filter = "brightness(100%)";
+    const map = document.getElementsByClassName("leaflet-layer");
+    if(map) map[0].style.filter = "brightness(80%)";
   }
 
   render() {
     const { marker } = this.props;
 
     return (
+      <div className="popup-container"
+      onMouseOver={this.mouseOver}
+      onMouseLeave={this.mouseLeave}  
+      >
         <Popup
         className="popup-sub container">
           { this.returnChooseFileBtn() }
           { this.returnImage() }
-          <div className="hidden-card">
-            { this.returnDescription() }
-            <div className="row location-text">
-            <h5 className="col country-text">{marker.country}</h5>
+          <div className="empty-marker-container"
+          style={marker.image?null:{ display: "block" }}
+          >
+            <div className="row location-container">
+              { this.returnDescription() }
+              <h2 className="col country-text">{marker.country}</h2>
             </div>
-            <div className="row">
-            <p className="col latlng-txt">lat: {marker.latitude} <br/>long: {marker.longitude}</p>
+            <div className="hidden-card">
+              <div className="row edit-delete-latlng">
+              <button onClick={this.deleteMarker} className="btn btn-outline-danger marker-btns col">Delete Marker</button>
+              <button onClick={this.editMarkerBtn} className="btn btn-outline-info marker-btns col">Edit Marker</button>
+              <h5 className="col latlng-txt"><br/><i>lat: {marker.latitude} <br/>long: {marker.longitude}</i></h5>
             </div>
-            <div className="col edit-delete-btns">
-            <button onClick={this.deleteMarker} className="btn btn-outline-danger marker-btns row">Delete Marker</button>
-            <button onClick={this.editMarkerBtn} className="btn btn-outline-info marker-btns row">Edit Marker</button>
-            <div className="darken-map"></div>
           </div>
           </div>
         </Popup>
+        </div>
     );
   }
 }

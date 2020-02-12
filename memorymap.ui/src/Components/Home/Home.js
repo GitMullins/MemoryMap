@@ -11,8 +11,8 @@ import 'leaflet/dist/leaflet.css';
 
 const myIcon = L.icon({
   iconSize: [25, 41],
-  iconAnchor: [10, 41],
-  popupAnchor: [2, -40],
+  iconAnchor: [0, 0],
+  popupAnchor: [0, 0],
   iconUrl: 'https://unpkg.com/leaflet@1.5.1/dist/images/marker-icon.png'
 });
 
@@ -77,6 +77,16 @@ class Home extends React.Component {
     this.setState({ addMarker: !this.state.addMarker });
   }
 
+  popupOpen = () => {
+    const map = document.getElementsByClassName("leaflet-layer");
+    if(map) map[0].style.filter = "brightness(80%)";
+  }
+
+  popupClose = () => {
+    const map = document.getElementsByClassName("leaflet-layer");
+    if(map) map[0].style.filter = "brightness(100%)";
+  }  
+
   render() {
     const { userObj } = this.props;
     const { allMarkers } = this.state;
@@ -105,6 +115,8 @@ class Home extends React.Component {
     return (
       <div className="map-navbar-container">
         <Map
+        onPopupOpen={this.popupOpen}
+        onPopupClose={this.popupClose}
         style={ addMarker?{cursor:'pointer'} : null }
         className="map"
         center={[47.5162, 14.5501]}
