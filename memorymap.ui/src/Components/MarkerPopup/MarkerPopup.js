@@ -116,12 +116,12 @@ class MarkerPopup extends React.Component {
   }
 
   mouseOver = () => {
-    const map = document.getElementsByClassName("darken-map");
+    const map = document.getElementsByClassName("leaflet-layer");
     if(map) map[0].style.filter = "brightness(50%)";
   }
 
   mouseLeave = () => {
-    const map = document.getElementsByClassName("darken-map");
+    const map = document.getElementsByClassName("leaflet-layer");
     if(map) map[0].style.filter = "brightness(100%)";
   }
 
@@ -129,25 +129,33 @@ class MarkerPopup extends React.Component {
     const { marker } = this.props;
 
     return (
+      <div className="popup-container"
+      onMouseOver={this.mouseOver}
+      onMouseLeave={this.mouseLeave}  
+      >
         <Popup
         className="popup-sub container">
           { this.returnChooseFileBtn() }
           { this.returnImage() }
-          <div className="hidden-card">
+          <div className="empty-marker-container"
+          style={marker.image?null:{ display: "block" }}
+          >
             { this.returnDescription() }
-            <div className="row location-text">
-            <h5 className="col country-text">{marker.country}</h5>
+            <div className="row location-container">
+              <h2 className="col country-text">{marker.country}</h2>
             </div>
-            <div className="row">
-            <p className="col latlng-txt">lat: {marker.latitude} <br/>long: {marker.longitude}</p>
+            <div className="hidden-card">
+              <div className="row">
+              <h5 className="col latlng-txt"><br/><i>lat: {marker.latitude} <br/>long: {marker.longitude}</i></h5>
+              </div>
+              <div className="col edit-delete-btns">
+              <button onClick={this.deleteMarker} className="btn btn-outline-danger marker-btns row">Delete Marker</button>
+              <button onClick={this.editMarkerBtn} className="btn btn-outline-info marker-btns row">Edit Marker</button>
             </div>
-            <div className="col edit-delete-btns">
-            <button onClick={this.deleteMarker} className="btn btn-outline-danger marker-btns row">Delete Marker</button>
-            <button onClick={this.editMarkerBtn} className="btn btn-outline-info marker-btns row">Edit Marker</button>
-            <div className="darken-map"></div>
           </div>
           </div>
         </Popup>
+        </div>
     );
   }
 }
