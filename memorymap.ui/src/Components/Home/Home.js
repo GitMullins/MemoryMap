@@ -104,7 +104,6 @@ class Home extends React.Component {
     
     return (
       <div className="map-navbar-container">
-        <div id="cursor"/>
         <Map
         style={ addMarker?{cursor:'pointer'} : null }
         className="map"
@@ -112,6 +111,7 @@ class Home extends React.Component {
         zoom={this.state.zoom}
         onClick={this.addMarkerOnMap}
         >
+            <div id="cursor"/>
             <Search
             className="search-bar"
             inputPlaceholder="Address Search"
