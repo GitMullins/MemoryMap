@@ -34,7 +34,9 @@ const addMarker = newMarkerObj => new Promise((resolve, reject) => {
   const api = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${newMarkerObj.latitude},${newMarkerObj.longitude}&result_type=country&key=${geocodeApi}`
   fetch(api).then((res) => res.json())
   .then((jsonObj) => {
-    newMarkerObj.country = jsonObj.results[0].formatted_address;
+    if(jsonObj.results.length > 0) {
+      newMarkerObj.country = jsonObj.results[0].formatted_address
+    }
   })
 
   .then(() => axios.post(`${baseUrl}/newMarker`, newMarkerObj))
