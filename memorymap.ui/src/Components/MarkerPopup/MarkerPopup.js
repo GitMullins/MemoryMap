@@ -158,7 +158,7 @@ class MarkerPopup extends React.Component {
               <div className="row edit-delete-latlng">
               <button onClick={this.deleteMarker} className="btn btn-outline-danger marker-btns col">Delete Marker</button>
               <button onClick={this.editMarkerBtn} className="btn btn-outline-info marker-btns col">Edit Marker</button>
-              <h5 className="col latlng-txt"><br/><i>lat: {marker.latitude} <br/>long: {marker.longitude}</i></h5>
+              <h5 className="col latlng-txt"><br/><i>lat: {marker.latitude} <br/>lng: {marker.longitude}</i></h5>
             </div>
           </div>
           </div>

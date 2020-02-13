@@ -10,7 +10,7 @@
 }
 
 .leaflet-popup-content-wrapper:hover{
-  background-color: antiquewhite;
+  background-color: white;
   opacity: (1);
   transform: scale(1.2,1.1) !important;
   .hidden-card {
@@ -52,7 +52,7 @@
   justify-content: space-between;
   margin-left: 0 !important;
   margin-right: 0 !important;
-  background-color: antiquewhite;
+  background-color: white;
 }
 
 .description-form-input{
@@ -86,4 +86,8 @@
   background-color: none !important;
   width: 50%;
   height: 50%;
+}
+
+.latlng-txt {
+  font-size: medium;
 }

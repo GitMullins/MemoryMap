@@ -40,6 +40,21 @@
   z-index: 400;
 }
 
+#lat-lng {
+  width: 125px;
+  height: 50px;
+  background-color: white;
+  border-radius: 5%;
+  box-shadow: 5px 4px 9px #524f4f;
+  position: absolute;
+  pointer-events: none;
+  z-index: 400;
+  left: 355px;
+  top: 8px;
+  text-align: left;
+  font-size: medium;
+}
+
 #cursor::after {
   content: "";
   width: 20px;

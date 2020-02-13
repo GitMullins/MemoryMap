@@ -11,7 +11,7 @@ import 'leaflet/dist/leaflet.css';
 
 const myIcon = L.icon({
   iconSize: [25, 41],
-  iconAnchor: [0, 0],
+  iconAnchor: [11, 30],
   popupAnchor: [0, 0],
   iconUrl: 'https://unpkg.com/leaflet@1.5.1/dist/images/marker-icon.png'
 });
@@ -33,6 +33,8 @@ class Home extends React.Component {
     addMarker: false,
     newMarker: defaultMarker,
     allMarkers: [],
+    lat: null,
+    lng: null
   }
 
   componentDidMount() {
@@ -45,7 +47,12 @@ class Home extends React.Component {
     .catch((err) => console.error('did not get all markers', err));
   }
 
+  returnLatLng = (e) => {
+    this.setState({ lat: e.latlng.lat.toFixed(4), lng: e.latlng.lng.toFixed(4) });
+  }
+
   addMarkerOnMap = (e)=> {
+    this.returnLatLng(e);
     if(this.state.addMarker === true) {
       const tempMarker = { ...this.state.newMarker };
       tempMarker.latitude = e.latlng.lat;
@@ -91,6 +98,8 @@ class Home extends React.Component {
     const { userObj } = this.props;
     const { allMarkers } = this.state;
     const { addMarker } =this.state;
+    const { lat } = this.state;
+    const { lng } = this.state;
 
     const makeMarkers = allMarkers.map(marker => (
       <Marker
@@ -124,6 +133,7 @@ class Home extends React.Component {
         onClick={this.addMarkerOnMap}
         >
             <div id="cursor"/>
+            <div id="lat-lng">&nbsp;<b>lat:</b> {lat}<br/>&nbsp;<b>lng:</b> {lng}</div>
             <Search
             className="search-bar"
             inputPlaceholder="Address Search"
