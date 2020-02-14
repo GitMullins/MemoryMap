@@ -1,7 +1,7 @@
 # Memory Map
 
 ## Description
-Made for storing pictures by geolocation. A user can place a marker on the map, upload an image, and include a description about the pic. A Google API call will reverse geocode the location and store images by country also.
+Made for storing pictures by geolocation. A user can place a marker on the map, upload an image, and include a description about the pic. A Google API call will reverse geocode the location and store images by country.
 
 ## Screenshot
 ![image of memory map home component](https://raw.githubusercontent.com/GitMullins/MemoryMap/master/ReadMePic.png)
