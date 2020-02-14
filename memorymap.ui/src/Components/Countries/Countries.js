@@ -66,10 +66,10 @@ class Countries extends React.Component {
         </div>
         <UncontrolledCollapse className="country-card-toggler" toggler={`#toggler-${i}`}>
         <div className="container country-card-container">
-          <div className="row" style={{ justifyContent: "flex-start" }}>
+          <div className="row country-row" style={{ justifyContent: "flex-start" }}>
           {markers.filter(arrayItem => arrayItem.country === country)
           .map((marker) => (
-            <div className="col-4" key={marker.id}>
+            <div className="col-4 country-col" key={marker.id}>
             <CountryCard
             className="country-card"
             key={marker.id}
